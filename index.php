@@ -44,7 +44,6 @@
                     header('Location: /deals');
                 }
             }
-            echo 'fourth';
             $stmt->close();
             $conn->close();
             exit;
