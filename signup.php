@@ -71,7 +71,7 @@
         if($emailedCode == $_SESSION['emailedCode'] && $_SESSION['emailedCode'] != "" && time() - $_SESSION['st'] < 300){
             $_SESSION['emailedCode'] = $_SESSION['uEmail'];
             require 'aws.phar';
-            $client = new Aws\PinpointSMSVoiceV2\PinpointSMSVoiceV2Client(['region'=>'us-east-2','credentials'=>['key'=>'AKIAY2M4YSTP4HRRYZXB','secret'=>'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']]);
+            $client = new Aws\PinpointSMSVoiceV2\PinpointSMSVoiceV2Client(['region'=>'us-east-2','credentials'=>['key'=>'AKIAY2M4YSTP4HRRYZXB','secret'=>${{ secrets.AWS_SECRET }}]]);
             $code = $_SESSION['smsCode'] = mt_rand(100000,999999);
             $result = $client->sendTextMessage([
                 'DestinationPhoneNumber' => "+1".$_SESSION['phone'],
