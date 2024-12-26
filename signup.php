@@ -22,7 +22,7 @@
         }
         
         require 'aws.phar';
-        $client = new Aws\Ses\SesClient(['region'=>'us-east-1','credentials'=>['key'=>'AKIAY2M4YSTP4HRRYZXB','secret'=>'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']]);
+        $client = new Aws\Ses\SesClient(['region'=>'us-east-1','credentials'=>['key'=>'AKIAY2M4YSTP4HRRYZXB','secret'=>${{ secrets.AWS_SECRET }}]]);
         
         $code = $_SESSION['emailedCode'] = mt_rand(100000,999999);
         
