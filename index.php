@@ -3,6 +3,11 @@
     if(isset($_SESSION['role'])){
         header('Location: /deals');
     }
+<<<<<<< HEAD
+=======
+    echo 'here';
+    exit;
+>>>>>>> 0eadafe249e7e6006ddb0381ab58f168d0dc8dfc
     if($_SERVER['REQUEST_METHOD'] == "GET"){
         echo 'here2';
         exit;
