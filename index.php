@@ -1,5 +1,5 @@
 <?
-    echo 'here';
+    echo 'here2';
     exit;
     require 'assets/helper.php';
     if(isset($_SESSION['role'])){
