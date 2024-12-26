@@ -3,7 +3,7 @@
     if(isset($_SESSION['role'])){
         header('Location: /deals');
     }
-    echo 'here1';
+    echo 'here';
     exit;
     if($_SERVER['REQUEST_METHOD'] == "GET"){
         echo 'here2';
