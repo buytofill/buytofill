@@ -5,6 +5,7 @@
     }
     if($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
+            echo 'here';
             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             echo 'first';
             if($conn->connect_error){
@@ -54,7 +55,7 @@
         <meta name="author" content="">
         <meta name="keywords" content="BuyToFill"> 
         <meta name="robots" content="index, follow">
-        <title>BuyToPhil</title>
+        <title>BuyToFill</title>
         <link rel="icon" href="main/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="main/styles.css">
         <style>
