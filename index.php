@@ -3,8 +3,6 @@
     if(isset($_SESSION['role'])){
         header('Location: /deals');
     }
-    echo 'here1';
-    exit;
     if($_SERVER['REQUEST_METHOD'] == "GET"){
         echo 'here2';
         exit;
@@ -295,20 +293,4 @@
         </main>
         <div id="toast" onclick="this.classList=''">Invalid email or password.</div>
     </body>
-    <script>
-        let tid;
-        async function login(a,e) {
-            e.preventDefault();
-            const b = await fetch("#", {method:'POST', body: new FormData(a)});
-            const c = await b.json();
-            if(!c){
-                let toast = document.querySelector("#toast");
-                if(toast.classList == ""){
-                    clearTimeout(tid);
-                    toast.classList = "show";
-                    tid = setTimeout(() => {toast.classList = ""}, 10000);
-                }
-            }else window.location.href="deals"
-        }
-    </script>
 </html>
