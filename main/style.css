@@ -195,6 +195,7 @@ main header a div button:hover{background:var(--mid);outline:1px solid var(--gre
             
             /* Firefox */
             input[type=number] {
+                appearance: none;
               -moz-appearance:textfield;
             }
             #c-t label{
