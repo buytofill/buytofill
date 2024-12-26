@@ -1,6 +1,5 @@
 <?php
     session_start();
-    require('main/env.php');
     
     if($_SERVER['REQUEST_METHOD']=="GET"){
             $_SESSION['cryptMethod'] = 'AES-256-CBC';

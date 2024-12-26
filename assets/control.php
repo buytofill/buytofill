@@ -23,11 +23,6 @@
         $_SESSION['cryptIV'] = openssl_random_pseudo_bytes(openssl_cipher_iv_length($_SESSION['cryptMethod'])); 
     }
     
-    foreach(file(__DIR__.'/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line){
-        list($name, $value) = explode('=', $line, 2);
-        putenv("$name=$value");
-    }
-    
     function dav($subject){
         $cid = openssl_decrypt(base64_decode($subject), $_SESSION['cryptMethod'], $_SESSION['cryptKey'], 0, $_SESSION['cryptIV']);
         if ($cid === false) return false;

@@ -1,6 +1,5 @@
 <?php
     session_start();
-    require('main/env.php');
     
     if($_SERVER['REQUEST_METHOD']=="GET"){
         if(isset($_SESSION['role']) && $_SESSION['role'] == "staff" && $_SESSION['level'] == 5){

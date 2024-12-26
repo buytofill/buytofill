@@ -1,8 +1,5 @@
 <?
     session_start();
-    require('main/env.php');
-    
-    
     /* print_r($result['@metadata']['statusCode']); */ 
     
     if(isset($_POST['email'])){

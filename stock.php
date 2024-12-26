@@ -1,6 +1,5 @@
 <?php
     session_start();
-    require('main/env.php');
   
     if(!isset($_SESSION['role']) || $_SESSION['role'] != "admin"){
         header('Location: .');
