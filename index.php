@@ -8,6 +8,7 @@
             echo 'here';
             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             echo 'first';
+            exit;
             if($conn->connect_error){
                 die($conn->connect_error);
             }
