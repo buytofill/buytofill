@@ -3,9 +3,13 @@
     if(isset($_SESSION['role'])){
         header('Location: /deals');
     }
+    echo 'here1';
+    exit;
     if($_SERVER['REQUEST_METHOD'] == "GET"){
+        echo 'here2';
+        exit;
         if(isset($_GET['email']) && isset($_GET['password'])){
-            echo 'here';
+            echo 'here3';
             exit;
             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             echo 'first';
