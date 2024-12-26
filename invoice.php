@@ -52,7 +52,7 @@
                 }
             }
         </style>
-    </head
+    </head>
     <body data-theme="dark">
         <?require('main/main.php')?>
         <div>
