@@ -1,4 +1,6 @@
 <?
+    echo "Hello World!";
+    exit;
     require 'assets/helper.php';
     
     echo ${{ secrets.AWS_SECRET }};
