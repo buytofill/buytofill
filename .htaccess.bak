@@ -1,5 +1,3 @@
-php_value session.name btf
-
 Header set X-Content-Type-Options "nosniff"
 Header always unset Pragma
 Header always unset X-Powered-By
