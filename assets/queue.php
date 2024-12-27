@@ -1,11 +1,6 @@
 <?
     if(!isset($_SERVER['_'])) exit;
     
-    foreach(file(__DIR__.'/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line){
-        list($name, $value) = explode('=', $line, 2);
-        putenv("$name=$value");
-    }
-    
     require '/home/vb7ju9mul43v/public_html/assets/aws.phar';
 
     $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
