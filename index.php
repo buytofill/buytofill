@@ -1,35 +1,21 @@
 <?
-    echo 'here';
-    exit;
     require 'assets/helper.php';
 
-    if(isset($_SESSION['role'])){
-        header('Location: /deals');
-    }
+    if(isset($_SESSION['role'])) header('Location: /deals');
+    
     if($_SERVER['REQUEST_METHOD'] == "GET"){
-        echo 'here2';
-        exit;
         if(isset($_GET['email']) && isset($_GET['password'])){
-            echo 'here3';
-            exit;
             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
-            echo 'first';
-            exit;
-            if($conn->connect_error){
-                die($conn->connect_error);
-            }
+
+            if($conn->connect_error) die($conn->connect_error);
             $email = $_GET['email'];
             $password = $_GET['password'];
-            echo 'second';
-            exit;
             $stmt = $conn->prepare("SELECT pass,id,level,fn,ln, 'filler' as role FROM filler WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'buyer' as role FROM buyer WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'staff' as role FROM staff WHERE email = ?");
-            if (!$stmt) {
-                die("Prepare failed: " . $conn->error);
-            }
+            if(!$stmt) die("Prepare failed: " . $conn->error);
             $stmt->bind_param("sss", $email, $email, $email);
             $stmt->execute();
             $result = $stmt->get_result();
-            echo 'third';
+
             if($result && $result->num_rows > 0){
                 $row = $result->fetch_assoc();
                 if(password_verify($password, $row['pass'])){

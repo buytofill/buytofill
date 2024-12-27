@@ -1,32 +1,11 @@
 <?
-    session_start();
+    require 'assets/helper.php';
     
-    if ($_SERVER['REQUEST_METHOD'] == "GET") {
-        if (isset($_SESSION['role']) && $_SESSION['role'] == "staff") {
-            $_SESSION['cM'] = 'AES-256-CBC';
-            $_SESSION['cK'] = openssl_random_pseudo_bytes(32);
-            $_SESSION['cI'] = openssl_random_pseudo_bytes(openssl_cipher_iv_length($_SESSION['cM'])); 
-            
-            function enc($string) {
-                return openssl_encrypt($string,$_SESSION['cM'],$_SESSION['cK'],0,$_SESSION['cI']);
-            }
-        }else{
-            
-            header('Location: login');
-        }
-    }
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER['REQUEST_METHOD'] == "GET" && (!isset($_SESSION['role']) || $_SESSION['role'] != "staff")) {
+        header('Location: login');
+    }elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
-        
-        function dav($encryption) {
-            return filter_var(openssl_decrypt($encryption, $_SESSION['cM'], $_SESSION['cK'], 0, $_SESSION['cI']), FILTER_VALIDATE_INT) ?: false;
-        }
-        
         $uid = $_SESSION['uid'];
-        
-        
-        
-        
         $conn->close();
         exit;
     }
