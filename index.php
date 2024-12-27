@@ -1,6 +1,11 @@
 <?
     require 'assets/helper.php';
 
+    echo 'here';
+    print_r($_SERVER);
+    print_r($_GET);
+    exit;
+
     if(isset($_SESSION['role'])){
         header('Location: /deals');
         exit;
