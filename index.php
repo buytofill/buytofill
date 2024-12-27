@@ -7,13 +7,47 @@
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
             ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
-            $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
-            if($conn->connect_error){
-                die($conn->connect_error);
-            }
-            echo 'here';
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Helper function to display errors and terminate the script
+function debug_and_exit($message) {
+    echo $message;
+    exit;
+}
+
+// Check if necessary environment variables are set
+$required_env_vars = ['DATABASE_HOST', 'DATABASE_USER', 'DATABASE_PASS', 'DATABASE_NAME'];
+foreach ($required_env_vars as $var) {
+    if (!getenv($var)) {
+        debug_and_exit("Environment variable $var is not set.\n");
+    }
+}
+
+// Store the environment variables
+$db_host = getenv('DATABASE_HOST');
+$db_user = getenv('DATABASE_USER');
+$db_pass = getenv('DATABASE_PASS');
+$db_name = getenv('DATABASE_NAME');
+
+// Check if the mysqli extension is loaded
+if (!extension_loaded('mysqli')) {
+    debug_and_exit("The mysqli extension is not loaded. Please ensure it's installed and enabled.\n");
+}
+
+// Try to establish a connection to the database
+$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+// Check for connection errors
+if ($conn->connect_error) {
+    debug_and_exit("Connection failed: " . $conn->connect_error . "\n");
+}
+
+// If everything is fine, proceed
+echo "Connection successful. Everything is working as expected.\n";
+
+// Close the connection
+$conn->close();
             exit;
             
             $email = $_GET['email'];
