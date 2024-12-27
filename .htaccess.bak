@@ -1,4 +1,4 @@
-'''RewriteOptions inherit
+RewriteOptions inherit
 
 RewriteEngine On
 
@@ -85,4 +85,4 @@ RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
 SetEnv DATABASE_HOST "107.22.187.210"
 SetEnv DATABASE_USER "eric1298awdiuxohadbuytofill123"
 SetEnv DATABASE_PASS ${{ secrets.DB_PW }}
-SetEnv DATABASE_NAME "buytofill"'''
+SetEnv DATABASE_NAME "buytofill"
