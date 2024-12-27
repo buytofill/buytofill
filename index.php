@@ -7,17 +7,9 @@
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
             echo 'here';
-            print_r($_ENV)
+            print_r($_ENV);
+            print_r(get_loaded_extensions());
             exit;
-            
-
-// Check if necessary environment variables are set
-$required_env_vars = ['DATABASE_HOST', 'DATABASE_USER', 'DATABASE_PASS', 'DATABASE_NAME'];
-foreach ($required_env_vars as $var) {
-    if (!getenv($var)) {
-        debug_and_exit("Environment variable $var is not set.\n");
-    }
-}
 
 // Store the environment variables
 $db_host = getenv('DATABASE_HOST');
