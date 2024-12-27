@@ -6,14 +6,14 @@
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
-            print_r(getenv('DATABASE_HOST') . endl);
-            print_r(getenv('DATABASE_USER') .endl);
-            print_r(getenv('DATABASE_PASS') . endl);
-            print_r(getenv('DATABASE_NAME') . endl);
+            print_r(getenv('DATABASE_HOST') . "\n");
+            print_r(getenv('DATABASE_USER') . "\n");
+            print_r(getenv('DATABASE_PASS') . "\n");
+            print_r(getenv('DATABASE_NAME') . "\n");
             print_r(get_loaded_extensions());
             exit;
-
-            $conn = new mysqli();
+            #getenv('DATABASE_HOST')
+            $conn = new mysqli("198.12.245.3", getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error . "\n");
             }
