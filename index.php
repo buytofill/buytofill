@@ -1,5 +1,5 @@
 <?
-    echo 'clipped';
+    echo 'greg';
     exit;
     require 'assets/helper.php';
 
