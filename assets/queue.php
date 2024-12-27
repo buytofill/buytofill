@@ -14,7 +14,7 @@
 
     $conn->close();
 
-    $client = new Aws\Ses\SesClient(['region' => 'us-east-1', /*'debug' => true,*/ 'credentials' => ['key' => 'AKIAY2M4YSTP4HRRYZXB', 'secret' => ${{ secrets.AWS_SECRET }}]]);
+    $client = new Aws\Ses\SesClient(['region' => 'us-east-1', /*'debug' => true,*/ 'credentials' => ['key' => 'AKIAY2M4YSTP4HRRYZXB', 'secret' => getenv(AWS_SECRET)]]);
 
     foreach ($batches as $batch) {
         $destinations = [];
@@ -38,7 +38,7 @@
     }
     
     exit;
-    /*$client2 = new Aws\SesV2\SesV2Client(['region'=> 'us-east-1', 'credentials' =>['key'=> 'AKIAY2M4YSTP4HRRYZXB', 'secret'=> ${{ secrets.AWS_SECRET }}]]);
+    /*$client2 = new Aws\SesV2\SesV2Client(['region'=> 'us-east-1', 'credentials' =>['key'=> 'AKIAY2M4YSTP4HRRYZXB', 'secret'=> getenv(AWS_SECRET)]]);
     $client2->createEmailTemplate([
         'TemplateContent' => [
             'Html' =>   '<div style="background:#f3f4f6;border-radius:1rem;padding:2rem">
