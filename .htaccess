@@ -1,3 +1,76 @@
 RewriteOptions inherit
-
 RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+php_value session.name btf
+Header set X-Content-Type-Options "nosniff"
+Header always unset Pragma
+Header always unset X-Powered-By
+Header always unset Expires
+Header always unset Cache-Control
+Header set Cache-Control "no-cache"
+<FilesMatch ".woff2$">
+    Header set Cache-Control "max-age=31536000, public, immutable"
+</FilesMatch>
+RewriteCond %{HTTP_REFERER} !^http://btf.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://btf.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://btf.im/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://btf.im$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://e47c.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://e47c.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://e47c.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://e47c.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://jsdistributiongroup.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://jsdistributiongroup.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://jsdistributiongroup.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://jsdistributiongroup.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.btf.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.btf.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.btf.im/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.btf.im$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.e47c.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.e47c.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.e47c.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.e47c.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.jsdistributiongroup.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.jsdistributiongroup.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.jsdistributiongroup.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.jsdistributiongroup.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://btf.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://btf.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://btf.im/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://btf.im$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://e47c.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://e47c.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://e47c.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://e47c.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://jsdistributiongroup.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://jsdistributiongroup.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://jsdistributiongroup.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://jsdistributiongroup.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.btf.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.btf.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.btf.im/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.btf.im$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.e47c.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.e47c.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.e47c.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.e47c.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.jsdistributiongroup.buytofill.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.jsdistributiongroup.buytofill.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.jsdistributiongroup.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.jsdistributiongroup.com$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
