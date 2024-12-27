@@ -6,10 +6,8 @@
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
-            ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+            echo 'here';
+            exit;
 // Helper function to display errors and terminate the script
 function debug_and_exit($message) {
     echo $message;
