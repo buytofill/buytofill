@@ -1,9 +1,10 @@
 <?
     require 'assets/helper.php';
 
-    if(isset($_SESSION['role'])) header('Location: /deals');
-    
-    if($_SERVER['REQUEST_METHOD'] == "GET"){
+    if(isset($_SESSION['role'])){
+        header('Location: /deals');
+        exit;
+    }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
 
