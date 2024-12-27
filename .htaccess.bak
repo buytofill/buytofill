@@ -82,6 +82,7 @@ RewriteCond %{HTTP_REFERER} !^https://www.jsdistributiongroup.com/.*$      [NC]
 RewriteCond %{HTTP_REFERER} !^https://www.jsdistributiongroup.com$      [NC]
 RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
 
+
 SetEnv DATABASE_HOST "107.22.187.210"
 SetEnv DATABASE_USER "eric1298awdiuxohadbuytofill123"
 SetEnv DATABASE_PASS ${{ secrets.DB_PW }}
