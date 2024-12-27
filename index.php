@@ -7,12 +7,9 @@
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
             echo 'here';
+            print_r($_ENV)
             exit;
-// Helper function to display errors and terminate the script
-function debug_and_exit($message) {
-    echo $message;
-    exit;
-}
+            
 
 // Check if necessary environment variables are set
 $required_env_vars = ['DATABASE_HOST', 'DATABASE_USER', 'DATABASE_PASS', 'DATABASE_NAME'];
