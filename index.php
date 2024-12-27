@@ -7,7 +7,7 @@
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
             echo 'here';
-            print_r($_ENV);
+            print_r(getenv('DATABASE_HOST'));
             print_r(get_loaded_extensions());
             exit;
 
