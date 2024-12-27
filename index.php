@@ -1,5 +1,5 @@
 <?
-    echo 'here';
+    echo 'clip';
     exit;
     require 'assets/helper.php';
 
