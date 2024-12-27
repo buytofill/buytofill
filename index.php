@@ -1,5 +1,5 @@
 <?
-    echo 'here';
+    echo 'greg';
     exit;
     require 'assets/helper.php';
 
