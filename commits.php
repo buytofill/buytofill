@@ -1,10 +1,10 @@
  <?
     require 'assets/helper.php';
         
-    if($_SERVER['REQUEST_METHOD']=="GET" && !isset($_SESSION['role'])){
+    /*if($_SERVER['REQUEST_METHOD']=="GET" && !isset($_SESSION['role'])){
         header('Location: .');
         exit;
-    }
+    }*/
     if($_SERVER["REQUEST_METHOD"]=="POST"){ 
         $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
         if($conn->connect_error){ say(['err'=>'Database connection failed'],500); }
