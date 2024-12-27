@@ -1,14 +1,9 @@
  <?
-    require 'assets/control.php';
+    require 'assets/helper.php';
         
-    if($_SERVER['REQUEST_METHOD']=="GET"){
-        if(isset($_SESSION['role'])){
-            $_SESSION['cryptMethod'] = 'AES-256-CBC';
-            $_SESSION['cryptKey'] = openssl_random_pseudo_bytes(32);
-            $_SESSION['cryptIV'] = openssl_random_pseudo_bytes(openssl_cipher_iv_length($_SESSION['cryptMethod'])); 
-        }else{
-            header('Location: .');
-        }
+    if($_SERVER['REQUEST_METHOD']=="GET" && !isset($_SESSION['role'])){
+        header('Location: .');
+        exit;
     }
     if($_SERVER["REQUEST_METHOD"]=="POST"){ 
         $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
@@ -16,7 +11,7 @@
         $encryption = $_POST['clickedEditTracking'] ?? $_POST['st-select'] ?? null;
     
         if($encryption){
-            $cid = decryptAndValidate($encryption);
+            $cid = dav($encryption);
             if(!$cid){ say(['err' => 'Invalid or non-numeric ID'], 400); }
         }
         if(isset($_POST['clickedEditTracking'])){ handleEditTracking($conn, $cid); }
@@ -24,12 +19,6 @@
         if(isset($_POST['toDelete'])){ handleDelete($conn); }
     
         $conn->close();
-    }
-    
-    function decryptAndValidate($encryption){
-        $cid = openssl_decrypt($encryption, $_SESSION['cryptMethod'], $_SESSION['cryptKey'], 0, $_SESSION['cryptIV']);
-        if ($cid === false) return false;
-        return filter_var($cid, FILTER_VALIDATE_INT) ?: false;
     }
     
     function handleEditTracking($conn, $cid){
