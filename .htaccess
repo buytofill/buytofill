@@ -1,15 +1,12 @@
 RewriteOptions inherit
 RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
 php_value session.name btf
-Header set X-Content-Type-Options "nosniff"
-Header always unset Pragma
-Header always unset X-Powered-By
-Header always unset Expires
-Header always unset Cache-Control
-Header set Cache-Control "no-cache"
+
 <FilesMatch ".woff2$">
     Header set Cache-Control "max-age=31536000, public, immutable"
 </FilesMatch>
