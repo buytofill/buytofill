@@ -1,16 +1,13 @@
 <?
     require 'assets/helper.php';
 
-    echo 'here';
-    print_r($_SERVER);
-    print_r($_GET);
-    exit;
-
     if(isset($_SESSION['role'])){
         header('Location: /deals');
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
+            echo 'here';
+            exit;
             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
 
             if($conn->connect_error){
