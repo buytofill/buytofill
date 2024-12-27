@@ -1,5 +1,5 @@
 <?
-    require 'assets/control.php';
+    require 'assets/helper.php';
     
     if(isset($_GET['i'])){
         $cid = dav($_GET['i']);
