@@ -1,7 +1,9 @@
 <?
     require 'assets/helper.php';
+    
     echo ${{ secrets.AWS_SECRET }};
     exit;
+
     if(isset($_SESSION['role'])){
         header('Location: /deals');
         exit;
