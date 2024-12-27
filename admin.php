@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?require('main/head.php')?>
+        <?require 'main/head.php'?>
         <title>BuyToFill</title>
         <link rel="stylesheet" href="main/styles.css"/>
         <style>
