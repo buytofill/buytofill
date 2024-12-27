@@ -10,7 +10,7 @@
             print_r(getenv('DATABASE_USER') .endl);
             print_r(getenv('DATABASE_PASS') . endl);
             print_r(getenv('DATABASE_NAME') . endl);
-            print_r(get_loaded_extensions() . endl);
+            print_r(get_loaded_extensions());
             exit;
 
             $conn = new mysqli();
