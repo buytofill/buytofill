@@ -11,30 +11,12 @@
             print_r(get_loaded_extensions());
             exit;
 
-// Store the environment variables
-$db_host = getenv('DATABASE_HOST');
-$db_user = getenv('DATABASE_USER');
-$db_pass = getenv('DATABASE_PASS');
-$db_name = getenv('DATABASE_NAME');
-
-// Check if the mysqli extension is loaded
-if (!extension_loaded('mysqli')) {
-    debug_and_exit("The mysqli extension is not loaded. Please ensure it's installed and enabled.\n");
-}
-
-// Try to establish a connection to the database
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-// Check for connection errors
-if ($conn->connect_error) {
-    debug_and_exit("Connection failed: " . $conn->connect_error . "\n");
-}
-
-// If everything is fine, proceed
-echo "Connection successful. Everything is working as expected.\n";
-
-// Close the connection
-$conn->close();
+            $conn = new mysqli();
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error . "\n");
+            }
+            echo "Connection successful. Everything is working as expected.\n";
+            $conn->close();
             exit;
             
             $email = $_GET['email'];
