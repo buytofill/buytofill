@@ -6,7 +6,3 @@ RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 php_value session.name btf
-
-<FilesMatch ".woff2$">
-    Header set Cache-Control "max-age=31536000, public, immutable"
-</FilesMatch>
