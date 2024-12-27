@@ -6,6 +6,9 @@
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             if($conn->connect_error){
                 die($conn->connect_error);
