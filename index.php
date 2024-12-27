@@ -1,6 +1,4 @@
 <?
-    phpinfo();
-    exit;
     require 'assets/helper.php';
 
     if(isset($_SESSION['role'])){
