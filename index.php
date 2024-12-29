@@ -14,9 +14,8 @@
             } catch (PDOException $e) {
                 die("Connection failed: " . $e->getMessage());
             }
-            exit;
             
-            $email = $_GET['email'];
+            /*$email = $_GET['email'];
             $password = $_GET['password'];
             $stmt = $conn->prepare("SELECT pass,id,level,fn,ln, 'filler' as role FROM filler WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'buyer' as role FROM buyer WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'staff' as role FROM staff WHERE email = ?");
             if(!$stmt) die("Prepare failed: " . $conn->error);
@@ -40,7 +39,7 @@
                 }
             }
             $stmt->close();
-            $conn->close();
+            $conn->close();*/
             exit;
         }
     }
