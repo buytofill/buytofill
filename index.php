@@ -12,16 +12,16 @@
 
     echo "Initializing connection...<br>";
 
-    $conn = new mysqli($host, $username, $password, $database);
+    #$conn = new mysqli($host, $username, $password, $database);
 
     echo "After connection attempt...<br>";
 
-    if ($conn->connect_error) {
-        die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
-    }
+    #if ($conn->connect_error) {
+    #    die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
+    #}
 
     echo "Connected successfully!<br>";
-    $conn->close();
+    #$conn->close();
 
     echo "Connection closed successfully.<br>";
     exit;
