@@ -1,5 +1,4 @@
 <?
-    #require 'assets/helper.php';
     try {
         $pdo = new PDO("mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4", "admin_jasdgfasfdafes", "wZR}v&xg=S0Fsadwa3213damn");
 
@@ -8,6 +7,7 @@
         die("Connection failed: " . $e->getMessage());
     }
     exit;
+    #require 'assets/helper.php';
     echo 'here';
     exit;
     session_start();
