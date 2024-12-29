@@ -5,7 +5,7 @@
 
     echo "Starting script...<br>";
 
-    $host = 'localhost';
+    $host = '127.0.0.1';
     $username = 'admin_jasdgfasfdafes';
     $password = 'wZR}v&xg=S0Fsadwa3213damn';
     $database = 'buytofill';
