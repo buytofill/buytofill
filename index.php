@@ -27,6 +27,8 @@
                     $_SESSION['ln'] = $row['ln'];
                     $_SESSION['auid'] = N2A($row['id']);
                     header('Location: /deals');
+                }else{
+                    header('Location: ?invalid');
                 }
             }
             exit;
