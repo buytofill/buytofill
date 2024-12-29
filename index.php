@@ -1,6 +1,13 @@
 <?
     #require 'assets/helper.php';
+    try {
+        $pdo = new PDO("mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4", "admin_jasdgfasfdafes", "wZR}v&xg=S0Fsadwa3213damn");
 
+        echo "Connected successfully using PDO!";
+    } catch (PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
+    }
+    exit;
     echo 'here';
     exit;
     session_start();
