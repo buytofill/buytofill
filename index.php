@@ -1,5 +1,6 @@
 <?
     echo getenv('dsn') ?: 'DSN not set';
+    echo getenv('user') ?: 'DSN not set';
     exit;
     require 'assets/helper.php';
 
