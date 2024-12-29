@@ -21,8 +21,6 @@
 
     echo "Initializing connection...<br>";
 
-    #$conn = new mysqli($host, $username, $password, $database);
-
     echo "After connection attempt...<br>";
 
     #if ($conn->connect_error) {
@@ -48,7 +46,6 @@
 
             #eric1298awdiuxohadbuytofill123
             #wZR}v&xg=S0Fsadwa3213damn
-            $conn = new mysqli("107.22.187.210", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn' "buytofill");
             if ($conn->connect_error) {
                 echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
             } else {
