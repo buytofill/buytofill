@@ -7,7 +7,7 @@
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
             try {
-                $pdo = new PDO(getenv('dsn'), getenv('user'), getenv('pass'));
+                $pdo = new PDO('mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4', getenv('user'), getenv('pass'));
         
                 echo "Connected successfully using PDO!";
             } catch (PDOException $e) {
