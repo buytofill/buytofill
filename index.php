@@ -10,7 +10,9 @@
             #getenv('DATABASE_HOST')
             $conn = new mysqli("198.12.245.3", getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error . "\n");
+                die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n");
+            } else {
+                echo "Connected successfully";
             }
             echo "Connection successful. Everything is working as expected.\n";
             $conn->close();
