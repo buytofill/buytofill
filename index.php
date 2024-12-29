@@ -4,8 +4,12 @@
     #require 'assets/helper.php';
 
     session_start();
-    
-    $conn = new mysqli("127.0.0.1", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
+    $host = 'localhost';
+    $username = 'eric1298awdiuxohadbuytofill123';
+    $password = 'wZR}v&xg=S0Fsadwa3213damn';
+    $database = 'buytofill';
+    $socket = "/var/run/mysqld/mysqld.sock"
+    $conn = new mysqli($host, $username, $password, $database, null, $socket);
 
     if ($conn->connect_error) {
         die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
