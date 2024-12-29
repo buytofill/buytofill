@@ -2,11 +2,8 @@
     #require 'assets/helper.php';
 
     session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('log_errors', 1);
-    ob_start();
-    $conn = new mysqli("127.0.0.1", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
+    
+    $conn = new mysqli("107.22.187.210", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
 
     if ($conn->connect_error) {
         die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
