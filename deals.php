@@ -1,4 +1,6 @@
 <?
+    echo 'here';
+    exit;
     require 'assets/control.php';
     
     if($_SERVER["REQUEST_METHOD"]=="POST"){
