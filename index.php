@@ -1,5 +1,5 @@
 <?
-    require 'assets/header.php';
+    require 'assets/helper.php';
 
     if(isset($_SESSION['role'])){
         header('Location: /deals');
