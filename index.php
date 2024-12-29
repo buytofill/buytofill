@@ -1,6 +1,10 @@
 <?
     require 'assets/helper.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ob_start();
 
+    
     if(isset($_SESSION['role'])){
         header('Location: /deals');
         exit;
@@ -9,7 +13,9 @@
             print_r(get_loaded_extensions());
             #getenv('DATABASE_HOST')
             
+            echo 'here';
             $conn = new mysqli("198.12.245.3", getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
+            echo 'there';
             if ($conn->connect_error) {
                 echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
             } else {
