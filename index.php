@@ -2,7 +2,7 @@
     #require 'assets/helper.php';
 
     session_start();
-
+    print_r(get_loaded_extensions());
     echo "Starting script...<br>";
 
     $host = '127.0.0.1';
@@ -33,7 +33,7 @@
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
-            print_r(get_loaded_extensions());
+            
             #getenv('DATABASE_HOST')
             #USER
 
