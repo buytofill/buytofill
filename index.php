@@ -5,7 +5,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     ob_start();
-    $conn = new mysqli("localhost", "eric1298awdiuxohadbuytofill123", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
+    $conn = new mysqli("127.0.0.1", "eric1298awdiuxohadbuytofill123", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
     if ($conn->connect_error) {
         echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
     } else {
