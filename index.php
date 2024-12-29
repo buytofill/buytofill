@@ -7,12 +7,12 @@
     ini_set('log_errors', 1);
     ob_start();
     $conn = new mysqli("127.0.0.1", "eric1298awdiuxohadbuytofill123", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
+
     if ($conn->connect_error) {
-        echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
-    } else {
-        echo "Connected successfully";
+        die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
     }
-    echo "Connection successful. Everything is working as expected.\n";
+
+    echo "Connected successfully!";
     $conn->close();
     exit;
 
