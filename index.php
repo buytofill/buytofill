@@ -1,5 +1,6 @@
 <?
     #require 'assets/helper.php';
+
     session_start();
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -22,8 +23,8 @@
         if(isset($_GET['email']) && isset($_GET['password'])){
             print_r(get_loaded_extensions());
             #getenv('DATABASE_HOST')
-            
-            $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
+            #USER
+            $conn = new mysqli(getenv('DATABASE_HOST'), "admin_jasdgfasfdafes", getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             if ($conn->connect_error) {
                 echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
             } else {
