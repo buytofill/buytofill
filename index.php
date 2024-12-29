@@ -6,7 +6,7 @@
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
-            #print_r(get_loaded_extensions());
+            print_r(get_loaded_extensions());
             #getenv('DATABASE_HOST')
             $conn = new mysqli("198.12.245.3", getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             if ($conn->connect_error) {
