@@ -1,19 +1,9 @@
 <?  
     try {
-        $pdo = new PDO(
-            "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4", 
-            "admin_jasdgfasfdafes", 
-            "wZR}v&xg=S0Fsadwa3213damn", 
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ]
-        );
-
-        echo "Connected successfully using PDO!";
+        new PDO("mysql:host=127.0.0.1;dbname=buytofill", "admin_jasdgfasfdafes", "wZR}v&xg=S0Fsadwa3213damn");
+        echo "Connected!";
     } catch (PDOException $e) {
-        die("Connection failed: " . $e->getMessage());
+        die("Connection failed.");
     }
     exit;
     require 'assets/control.php';
