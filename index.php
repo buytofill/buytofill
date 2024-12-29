@@ -5,7 +5,7 @@
 
     session_start();
     
-    $conn = new mysqli("107.22.187.210", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
+    $conn = new mysqli("localhost", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
 
     if ($conn->connect_error) {
         die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
