@@ -5,7 +5,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     ob_start();
-    $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
+    $conn = new mysqli("107.22.187.210", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn' "buytofill");
     if ($conn->connect_error) {
         echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
     } else {
@@ -24,7 +24,10 @@
             print_r(get_loaded_extensions());
             #getenv('DATABASE_HOST')
             #USER
-            $conn = new mysqli(getenv('DATABASE_HOST'), "admin_jasdgfasfdafes", getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
+
+            #eric1298awdiuxohadbuytofill123
+            #wZR}v&xg=S0Fsadwa3213damn
+            $conn = new mysqli("107.22.187.210", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn' "buytofill");
             if ($conn->connect_error) {
                 echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
             } else {
