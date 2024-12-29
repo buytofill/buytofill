@@ -1,6 +1,8 @@
-<?php
+<?
     #require 'assets/helper.php';
 
+    print('here');
+    exit;
     session_start();
     print_r(get_loaded_extensions());
     echo "Starting script...<br>";
