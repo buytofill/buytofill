@@ -1,5 +1,5 @@
 <?
-    echo 'here';
+    print_r(get_loaded_extensions());
     exit;
     require 'assets/control.php';
     
