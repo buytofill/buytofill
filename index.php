@@ -1,4 +1,6 @@
 <?
+    echo getenv('dsn') ?: 'DSN not set';
+    exit;
     require 'assets/helper.php';
 
     if(isset($_SESSION['role'])){
