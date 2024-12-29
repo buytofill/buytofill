@@ -1,7 +1,4 @@
 <?
-    echo getenv('dsn') ?: 'DSN not set';
-    echo getenv('user') ?: 'DSN not set';
-    exit;
     require 'assets/helper.php';
 
     if(isset($_SESSION['role'])){
@@ -10,7 +7,7 @@
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
             try {
-                $pdo = new PDO(getenv('dsn'), getenv('user'), getenv('pass'));
+                $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
         
                 echo "Connected successfully using PDO!";
             } catch (PDOException $e) {

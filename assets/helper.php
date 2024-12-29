@@ -1,5 +1,6 @@
 <?
     session_start();
+    $dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
     
     if(isset($_SESSION['role']) && !isset($_SESSION['cryptIV'])) $_SESSION['crypt'] = [openssl_random_pseudo_bytes(32), openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-256-CBC'))];
     
