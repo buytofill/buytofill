@@ -6,25 +6,16 @@
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
-            try {
-                $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
-        
-                echo "Connected successfully using PDO!";
-            } catch (PDOException $e) {
-                die("Connection failed: " . $e->getMessage());
-            }
-            exit;
-            
             $email = $_GET['email'];
             $password = $_GET['password'];
-            $stmt = $conn->prepare("SELECT pass,id,level,fn,ln, 'filler' as role FROM filler WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'buyer' as role FROM buyer WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'staff' as role FROM staff WHERE email = ?");
-            if(!$stmt) die("Prepare failed: " . $conn->error);
-            $stmt->bind_param("sss", $email, $email, $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
+            $stmt = $pdo->prepare("SELECT pass,id,level,fn,ln, 'filler' as role FROM filler WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'buyer' as role FROM buyer WHERE email = ? UNION SELECT pass,id,level,fn,ln, 'staff' as role FROM staff WHERE email = ?");
+            if(!$stmt) die("Prepare failed: " . $pdo->errorInfo()[2]);
+            $stmt->execute([$email, $email, $email]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if($result && $result->num_rows > 0){
-                $row = $result->fetch_assoc();
+            if($result && count($result) > 0){
+                $row = $result[0];
                 if(password_verify($password, $row['pass'])){
                     session_destroy();
                     session_start();
@@ -38,8 +29,6 @@
                     header('Location: /deals');
                 }
             }
-            $stmt->close();
-            $conn->close();
             exit;
         }
     }
