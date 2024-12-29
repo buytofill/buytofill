@@ -5,11 +5,10 @@
 
     session_start();
     $host = 'localhost';
-    $username = 'eric1298awdiuxohadbuytofill123';
+    $username = 'admin_jasdgfasfdafes';
     $password = 'wZR}v&xg=S0Fsadwa3213damn';
     $database = 'buytofill';
-    $socket = "/var/run/mysqld/mysqld.sock"
-    $conn = new mysqli($host, $username, $password, $database, null, $socket);
+    $conn = new mysqli($host, $username, $password, $database);
 
     if ($conn->connect_error) {
         die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
