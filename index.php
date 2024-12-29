@@ -1,58 +1,16 @@
 <?
-    try {
-        $pdo = new PDO("mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4", "admin_jasdgfasfdafes", "wZR}v&xg=S0Fsadwa3213damn");
-
-        echo "Connected successfully using PDO!";
-    } catch (PDOException $e) {
-        die("Connection failed: " . $e->getMessage());
-    }
-    exit;
-    #require 'assets/helper.php';
-    echo 'here';
-    exit;
-    session_start();
-    print_r(get_loaded_extensions());
-    echo "Starting script...<br>";
-
-    $host = '127.0.0.1';
-    $username = 'admin_jasdgfasfdafes';
-    $password = 'wZR}v&xg=S0Fsadwa3213damn';
-    $database = 'buytofill';
-
-    echo "Initializing connection...<br>";
-
-    echo "After connection attempt...<br>";
-
-    #if ($conn->connect_error) {
-    #    die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
-    #}
-
-    echo "Connected successfully!<br>";
-    #$conn->close();
-
-    echo "Connection closed successfully.<br>";
-    exit;
-
-
-    
     if(isset($_SESSION['role'])){
         header('Location: /deals');
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
-            
-            #getenv('DATABASE_HOST')
-            #USER
-
-            #eric1298awdiuxohadbuytofill123
-            #wZR}v&xg=S0Fsadwa3213damn
-            if ($conn->connect_error) {
-                echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
-            } else {
-                echo "Connected successfully";
+            try {
+                $pdo = new PDO(getenv('dsn'), getenv('user'), getenv('pass'));
+        
+                echo "Connected successfully using PDO!";
+            } catch (PDOException $e) {
+                die("Connection failed: " . $e->getMessage());
             }
-            echo "Connection successful. Everything is working as expected.\n";
-            $conn->close();
             exit;
             
             $email = $_GET['email'];
