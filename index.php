@@ -7,13 +7,13 @@
         exit;
     }elseif($_SERVER['REQUEST_METHOD'] == "GET"){
         if(isset($_GET['email']) && isset($_GET['password'])){
-            try {
+            /*try {
                 $pdo = new PDO(getenv('dsn'), getenv('user'), getenv('pass'));
         
                 echo "Connected successfully using PDO!";
             } catch (PDOException $e) {
                 die("Connection failed: " . $e->getMessage());
-            }
+            }*/
             
             /*$email = $_GET['email'];
             $password = $_GET['password'];
