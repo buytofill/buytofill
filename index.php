@@ -6,7 +6,7 @@
     ini_set('display_errors', 1);
     ini_set('log_errors', 1);
     ob_start();
-    $conn = new mysqli("127.0.0.1", "eric1298awdiuxohadbuytofill123", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
+    $conn = new mysqli("127.0.0.1", "admin_jasdgfasfdafes", 'wZR}v&xg=S0Fsadwa3213damn', "buytofill");
 
     if ($conn->connect_error) {
         die("Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error);
