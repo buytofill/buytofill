@@ -8,7 +8,7 @@
     $username = 'eric1298awdiuxohadbuytofill123';
     $password = 'wZR}v&xg=S0Fsadwa3213damn';
     $database = 'buytofill';
-    $socket = "/var/run/mysqld/mysqld.sock"
+    $socket = "/run/mysqld/mysqld.sock"
     $conn = new mysqli($host, $username, $password, $database, null, $socket);
 
     if ($conn->connect_error) {
