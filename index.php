@@ -14,7 +14,7 @@
             #getenv('DATABASE_HOST')
             
             echo 'here';
-            $conn = new mysqli("198.12.245.3", getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
+            $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
             echo 'there';
             if ($conn->connect_error) {
                 echo "Connection failed: (" . $conn->connect_errno . ") " . $conn->connect_error . "\n";
