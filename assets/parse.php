@@ -1,6 +1,6 @@
 <?
     $input = file_get_contents('php://stdin');
-    file_put_contents('email.php', $input);
+    file_put_contents('email_log.txt', $input);
     #change to pdo
 
     /*$data = file_get_contents("php://stdin");
