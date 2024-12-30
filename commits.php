@@ -280,7 +280,6 @@
         </style>
     </head>
     <body> 
-        <?require 'assets/header.php'?>
         <nav>
             <main>
                 <a href="#" class="y">All Commitments</a>
@@ -314,7 +313,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?
+                        <!--?
                             $conn = new mysqli(getenv('DATABASE_HOST'), getenv('DATABASE_USER'), getenv('DATABASE_PASS'), getenv('DATABASE_NAME'));
                             $uid = $_SESSION['uid'];
                             $stmt = $conn->prepare("SELECT o.pid, i.name, i.spec, o.price, c.qty, c.id FROM `commit` AS c INNER JOIN `order` AS o ON c.oid = o.id INNER JOIN `item` AS i ON o.pid = i.id WHERE c.uid = ? AND c.status >= 0 AND c.qty > 0 ORDER BY c.created DESC");
@@ -341,7 +340,7 @@
                                 <?
                             }
                             $conn->close();
-                        ?>
+                        ?-->
                     </tbody>
                 </table>
             </div>
