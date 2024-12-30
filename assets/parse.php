@@ -1,7 +1,7 @@
 <?
     #change to pdo
 
-    $data = file_get_contents("php://stdin");
+    /*$data = file_get_contents("php://stdin");
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $retailerString = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
@@ -159,7 +159,7 @@
         $conn->close();
     }
     
-    curl_close($ch);
+    curl_close($ch);*/
     
     exit;
 ?>
