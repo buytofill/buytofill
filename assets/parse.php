@@ -1,6 +1,17 @@
 <?
+    file_put_contents('email_log.txt', "Script executed\n");
+
+    // Capture the raw email content
     $input = file_get_contents('php://stdin');
-    file_put_contents('email_log.txt', $input);
+    
+    if ($input === false) {
+        file_put_contents('email_log.txt', "Failed to read input\n", FILE_APPEND);
+    } else {
+        file_put_contents('email_log.txt', "Email Content:\n" . $input . "\n", FILE_APPEND);
+    }
+
+    // Indicate script completion
+    file_put_contents('email_log.txt', "Script completed\n", FILE_APPEND);
     #change to pdo
 
     /*$data = file_get_contents("php://stdin");
