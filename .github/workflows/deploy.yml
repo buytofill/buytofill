@@ -18,4 +18,5 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
             cd /home/admin/web/buytofill.com/public_html
+            git reset --hard HEAD
             git pull origin main
