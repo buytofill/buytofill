@@ -11,6 +11,7 @@
     }
 
     // Indicate script completion
+    
     file_put_contents('email_log.txt', "Script completed\n", FILE_APPEND);
     #change to pdo
 
