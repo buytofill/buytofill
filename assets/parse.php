@@ -46,13 +46,17 @@
             if(isset($step)){
                 $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
                 $testt = "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=fcu8nLEiGrEviWhv6eOeO0jFssFAVe3GY2fZig5fK38H1iTom1fa8fKVju14%252f6W0vneXt3P3tFmPKubuEhIREw&t2=NTBFMTk5QzgyRUY5Nzc4N0FENTRDNzE3NjNCMkRBNkI";
-                file_put_contents("email_log.txt", $testt . "\na\n");
+                file_put_contents("email_log.txt", $testt . "\n\n");
                 $test = curl_init($testt);
+                curl_setopt($test, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($test, CURLOPT_HEADER, true);
+                curl_setopt($test, CURLOPT_NOBODY, true); // Fetch only headers
+                curl_setopt($test, CURLOPT_FOLLOWLOCATION, false);
                 curl_setopt($test, CURLOPT_USERAGENT, "/");
 
                 $v = curl_exec($test);
                 if($v == false){
-                    $error_msg = curl_error($ch);
+                    $error_msg = curl_error($test);
                     file_put_contents("email_log.txt", $error_msg . "\n\n", FILE_APPEND);
                 }
                 file_put_contents("email_log.txt", print_r($v,true), FILE_APPEND);
