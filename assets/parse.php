@@ -5,6 +5,8 @@
     #Supports Google
     #Add support for yahoo, outlook, icloud
     #Add support for manually forwarded emails
+
+    #handle only one item of order being cancelled vs whole order cancelled
     if($sender == 'Gmail Team <forwarding-noreply@google.com>'){
         $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -15,21 +17,25 @@
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
         $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
-        file_put_contents("email_log.txt", $subject);
-        if($subject == "📦 Your package is going to be delivered. 📦"){
-            preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
-        }else{
-            preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*View Order Details\s*<\/a>/', $data, $a);
-        }
+        if($subject == "Thanks for your order."){
+            file_put_contents("email_log.txt", $subject . "\n\n");
+            if($subject == "📦 Your package is going to be delivered. 📦"){
+                preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
+            }else{
+                preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*View Order Details\s*<\/a>/', $data, $a);
+            }
 
-        $ch = curl_init("https://click.emailinfo2.bestbuy.com/?qs=".$a[1]);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_NOBODY, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, "/");
-        $t = curl_exec($ch);
-        file_put_contents("email_log.txt", $t, FILE_APPEND);
-        
+            $ch = curl_init("https://click.emailinfo2.bestbuy.com/?qs=".$a[1]);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_USERAGENT, "/");
+            $t = curl_exec($ch);
+            file_put_contents("email_log.txt", $t, FILE_APPEND);
+
+        }else{
+            exit;
+        }
         if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
             $step = ($subject == "Thanks for your order.") ? 1 : 0;
             $s1 = strpos($t,'t1');
