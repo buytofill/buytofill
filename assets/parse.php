@@ -15,6 +15,7 @@
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
         $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
+        file_put_contents("email_log.txt", $subject);
         if($subject == "📦 Your package is going to be delivered. 📦"){
             preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
         }else{
@@ -27,6 +28,7 @@
         curl_setopt($ch, CURLOPT_NOBODY, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, "/");
         $t = curl_exec($ch);
+        file_put_contents("email_log.txt", $t, FILE_APPEND);
         
         if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
             $step = ($subject == "Thanks for your order.") ? 1 : 0;
