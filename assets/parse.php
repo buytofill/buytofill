@@ -28,7 +28,6 @@
             curl_setopt($ch, CURLOPT_NOBODY, 1);
             curl_setopt($ch, CURLOPT_USERAGENT, "/");
             $t = curl_exec($ch);
-            curl_setopt($ch, CURLOPT_NOBODY, 0);
             file_put_contents("email_log.txt", $t . "\n\n", FILE_APPEND);
 
             $step = null;
@@ -47,24 +46,23 @@
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
             }
             if(isset($step)){
-                file_put_contents("email_log.txt", "here\n\n", FILE_APPEND);
                 curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1); // Force HTTP/1.1
-                curl_setopt($ch, CURLOPT_VERBOSE, 1); // Enable verbose output
+
+                file_put_contents("email_log.txt", "here\n\n", FILE_APPEND);
+                $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+                file_put_contents("email_log.txt", "URL before first cURL request: " . $url . "\n\n", FILE_APPEND);
+
                 $v = curl_exec($ch);
                 if ($v !== false) {
-                    file_put_contents("email_log.txt", "Response from first cURL request:\n" . $v . "\n\n", FILE_APPEND);
+                    file_put_contents("email_log.txt", $v . "\n\n", FILE_APPEND);
                 } else {
                     $error_msg = curl_error($ch);
-                    file_put_contents("email_log.txt", "Failed to execute first cURL request: " . $error_msg . "\n\n", FILE_APPEND);
+                    file_put_contents("email_log.txt", "Failed to execute curl: " . $error_msg . "\n\n", FILE_APPEND);
                 }
-
-                // Reset cURL handle
-                curl_reset($ch);
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_NOBODY, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Ensure we get the response back
                 $clipped = curl_exec($ch);
                 file_put_contents("email_log.txt", $clipped . "\n\n", FILE_APPEND);
                 #$orderContents = $clipped->order->items;
