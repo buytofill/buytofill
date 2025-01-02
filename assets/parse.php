@@ -48,7 +48,8 @@
                 curl_close($ch);
                 $ch = curl_init($url);
 
-                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                curl_setopt($ch, CURLOPT_FORBID_REUSE, true);
+                curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
                 file_put_contents("email_log.txt", $url . "\n\n");
 
                 $v = curl_exec($ch);
