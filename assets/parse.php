@@ -7,7 +7,6 @@
     file_put_contents('email_log.txt', $input, FILE_APPEND);
 
     /*
-    
     if($retailerString == '"Best Buy Notifications" <BestBuyInfo@emailinfo.bestbuy.com>'){
         $retailer = 0;
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
