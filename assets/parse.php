@@ -30,6 +30,7 @@
             $t = curl_exec($ch);
             file_put_contents("email_log.txt", $t . "\n\n", FILE_APPEND);
 
+            $step = None;
             if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
                 $step = ($subject == "Thanks for your order.") ? 1 : 0;
                 $s1 = strpos($t,'t1');
@@ -44,6 +45,7 @@
                 $s2 = strpos($t,'t2');
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
             }
+            file_put_contents("email_log.txt", $step . "\n\n", FILE_APPEND);
             if(isset($step)){
                 $v = curl_exec($ch);
                 file_put_contents("email_log.txt", $v . "\n\n", FILE_APPEND);
