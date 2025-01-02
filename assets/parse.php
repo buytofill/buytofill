@@ -15,25 +15,18 @@
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
         $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
-        file_put_contents('email_log.txt', $ref . "\n");
-        file_put_contents('email_log.txt', $subject . "\n", FILE_APPEND);
-        file_put_contents('email_log.txt', $data, FILE_APPEND);
-
         if($subject == "📦 Your package is going to be delivered. 📦"){
             preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
         }else{
             preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*View Order Details\s*<\/a>/', $data, $a);
         }
+
         $ch = curl_init("https://click.emailinfo2.bestbuy.com/?qs=".$a[1]);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_NOBODY, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, "/");
         $t = curl_exec($ch);
-        /* # USE PDO
-        
-
-        
         
         if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
             $step = ($subject == "Thanks for your order.") ? 1 : 0;
@@ -61,13 +54,10 @@
                 file_put_contents(__DIR__ . '/email_log.txt', print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
                 file_put_contents(__DIR__ . '/email_log.txt', print_r($orderContents, 1), FILE_APPEND);
             }
-        }*/
+        }
     }else exit;
     
-    /*$DATABASE_HOST = "198.12.245.3";
-    $DATABASE_USER = "eric1298awdiuxohadbuytofill123";
-    $DATABASE_PASS = "wZR}v&xg=S0Fsadwa3213damn";
-    $DATABASE_NAME = "buytofill";
+    /*
     
     if($step === 0 || $step === 1){
         $content = [];
