@@ -5,22 +5,13 @@
     $sender = preg_match('/^Return-path:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
     if($sender == "<forwarding-noreply@google.com>"){
-        file_put_contents('email_log.txt', $data);
-
-        if (preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $matches)) {
-            $link = $matches[0];
-            $link = str_replace('mail-settings.google', 'mail.google', $link);
+        if (preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $matches)){
+            $link = str_replace('mail-settings.google', 'mail.google', $matches[0]);
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $link);
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $response = curl_exec($ch);
-
-            file_put_contents('email_log.txt', "POST request sent to: " . $link . "\n\n", FILE_APPEND);
-            file_put_contents('email_log.txt', "Response: " . $response, FILE_APPEND);
-
-            curl_close($ch);
+            curl_exec($ch);
         } else {
             file_put_contents('email_log.txt', "No link found with 'mail/vf'", FILE_APPEND);
         }
