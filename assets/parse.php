@@ -47,6 +47,8 @@
             }
             if(isset($step)){
                 file_put_contents("email_log.txt", "here\n\n", FILE_APPEND);
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1); // Force HTTP/1.1
+                curl_setopt($ch, CURLOPT_VERBOSE, 1); // Enable verbose output
                 $v = curl_exec($ch);
                 if ($v !== false) {
                     file_put_contents("email_log.txt", $v . "\n\n", FILE_APPEND);
