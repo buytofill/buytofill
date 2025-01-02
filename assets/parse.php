@@ -45,7 +45,7 @@
             }
             if(isset($step)){
                 $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-                curl_close();
+                curl_close($ch);
                 $ch = curl_init($url);
                 file_put_contents("email_log.txt", $url . "\n\n");
 
