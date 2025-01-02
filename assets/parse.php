@@ -54,8 +54,8 @@
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_NOBODY, 0);
                 $clipped = json_decode(curl_exec($ch));
-                file_put_contents("email_log.txt", $clipped, FILE_APPEND);
-                $orderContents = $clipped->order->items;
+                file_put_contents("email_log.txt", print_r($clipped), FILE_APPEND);
+                #$orderContents = $clipped->order->items;
                 if($step == 3){
                     file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
                     file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
