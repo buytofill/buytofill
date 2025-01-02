@@ -14,13 +14,18 @@
             curl_setopt($ch, CURLOPT_URL, $link);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+                'Referer: https://mail.google.com/',
+                'Content-Type: application/x-www-form-urlencoded'
+            ]);
 
             $response = curl_exec($ch);
 
             if (curl_errno($ch)) {
                 file_put_contents('email_log.txt', "cURL error: " . curl_error($ch), FILE_APPEND);
             } else {
-                file_put_contents('email_log.txt', "POST request sent to: " . $link, FILE_APPEND);
+                file_put_contents('email_log.txt', "POST request sent to: " . $link . "\n\n", FILE_APPEND);
                 file_put_contents('email_log.txt', "Response: " . $response, FILE_APPEND);
             }
 
