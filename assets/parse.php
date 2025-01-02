@@ -19,11 +19,8 @@
 
         if($subject == "Thanks for your order."){
             file_put_contents("email_log.txt", $subject . "\n\n");
-            if($subject == "📦 Your package is going to be delivered. 📦"){
-                preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
-            }else{
-                preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*View Order Details\s*<\/a>/', $data, $a);
-            }
+            if($subject == "📦 Your package is going to be delivered. 📦") preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
+            else preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*View Order Details\s*<\/a>/', $data, $a);
 
             $ch = curl_init("https://click.emailinfo2.bestbuy.com/?qs=".$a[1]);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
