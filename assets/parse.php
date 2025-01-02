@@ -1,11 +1,11 @@
 <?
     $data = file_get_contents('php://stdin');
-    $sender = preg_match('/^Return-path:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
+    $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
     #Supports Google
     #Add support for yahoo, outlook, icloud
     #Add support for manually forwarded emails
-    file_put_contents('email_log.txt', $sender);
+    file_put_contents('email_log.txt', $data);
     if($sender == "<forwarding-noreply@google.com>"){
         $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
