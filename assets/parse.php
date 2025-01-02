@@ -6,9 +6,9 @@
         $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_exec($ch); # USE PDO
+        curl_exec($ch);
     }elseif($sender == "<BestBuyInfo@emailinfo.bestbuy.com>"){
-        $retailer = 0;
+        /*$retailer = 0; # USE PDO
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
         
         file_put_contents('email_log.txt', $data);
@@ -53,7 +53,7 @@
                 file_put_contents(__DIR__ . '/email_log.txt', print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
                 file_put_contents(__DIR__ . '/email_log.txt', print_r($orderContents, 1), FILE_APPEND);
             }
-        }
+        }*/
     }else exit;
     
     /*$DATABASE_HOST = "198.12.245.3";
