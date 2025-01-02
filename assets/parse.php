@@ -1,10 +1,59 @@
 <?
-    $input = file_get_contents('php://stdin');
-    file_put_contents('email_log.txt', $input);
-    
+$input = file_get_contents('php://stdin');
+
+// Split input into lines
+$lines = explode("\n", $input);
+$parsedData = [];
+$currentKey = null;
+$rawContent = [];
+$isBody = false;
+
+foreach ($lines as $line) {
+    $line = trim($line);
+
+    // Check if the line is empty (indicating the start of the body)
+    if ($line === "" && !$isBody) {
+        $isBody = true;
+        continue;
+    }
+
+    if ($isBody) {
+        // Handle the body (append raw content for MIME parsing)
+        $rawContent[] = $line;
+    } else {
+        // Match headers in "Key: Value" format
+        if (preg_match('/^([\w-]+): (.+)$/', $line, $matches)) {
+            $currentKey = $matches[1];
+            $value = $matches[2];
+
+            // Store in parsed data
+            $parsedData[$currentKey] = isset($parsedData[$currentKey])
+                ? $parsedData[$currentKey] . " " . $value
+                : $value;
+        } elseif ($currentKey && $line !== "") {
+            // Handle multiline headers
+            $parsedData[$currentKey] .= " " . $line;
+        }
+    }
+}
+
+// Save structured headers to output
+$output = "Headers:\n";
+foreach ($parsedData as $key => $value) {
+    $output .= "$key: $value\n";
+}
+
+// Add the body content
+$output .= "\nBody:\n" . implode("\n", $rawContent);
+
+// Write the output to email_log.txt
+file_put_contents('email_log.txt', $output);
+
+// Output for debugging (optional)
+echo $output;
     #change to pdo
 
-    /*$data = file_get_contents("php://stdin");
+    /*
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $retailerString = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
