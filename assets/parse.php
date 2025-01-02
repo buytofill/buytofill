@@ -45,7 +45,7 @@
             }
             if(isset($step)){
                 $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-                $testt = "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=fcu8nLEiGrEviWhv6eOeO0jFssFAVe3GY2fZig5fK38H1iTom1fa8fKVju14%252f6W0vneXt3P3tFmPKubuEhIREw&t2=NTBFMTk5QzgyRUY5Nzc4N0FENTRDNzE3NjNCMkRBNkI"
+                $testt = "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=fcu8nLEiGrEviWhv6eOeO0jFssFAVe3GY2fZig5fK38H1iTom1fa8fKVju14%252f6W0vneXt3P3tFmPKubuEhIREw&t2=NTBFMTk5QzgyRUY5Nzc4N0FENTRDNzE3NjNCMkRBNkI";
                 file_put_contents("email_log.txt", $testt . "\na\n");
                 $test = curl_init($testt);
 
