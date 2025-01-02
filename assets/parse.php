@@ -3,7 +3,7 @@
     $sender = preg_match('/^Return-path:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
     if($sender == "<forwarding-noreply@google.com>"){
-        $ch = curl_init($str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
+        $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_exec($ch); # USE PDO
