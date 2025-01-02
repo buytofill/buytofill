@@ -33,22 +33,23 @@
             $t = curl_exec($ch);
             file_put_contents("email_log.txt", $t, FILE_APPEND);
 
+            if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
+                $step = ($subject == "Thanks for your order.") ? 1 : 0;
+                $s1 = strpos($t,'t1');
+                $s2 = strpos($t,'t2');
+                curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
+            }elseif($subject == "We have your tracking number."){
+                $step = 3;
+                curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?token=".substr($t, strpos($t, 'token') + 8, 44)); #check consistency
+            }elseif($subject == "📦 Your package is going to be delivered. 📦"){
+                $step = 4;
+                $s1 = strpos($t,'t1');
+                $s2 = strpos($t,'t2');
+                curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
+            }
         }
         exit;
-        if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
-            $step = ($subject == "Thanks for your order.") ? 1 : 0;
-            $s1 = strpos($t,'t1');
-            $s2 = strpos($t,'t2');
-            curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
-        }elseif($subject == "We have your tracking number."){
-            $step = 3;
-            curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?token=".substr($t, strpos($t, 'token') + 8, 44)); #check consistency
-        }elseif($subject == "📦 Your package is going to be delivered. 📦"){
-            $step = 4;
-            $s1 = strpos($t,'t1');
-            $s2 = strpos($t,'t2');
-            curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
-        }
+        
         
         if(isset($step)){
             $v = curl_exec($ch);
