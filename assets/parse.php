@@ -47,6 +47,7 @@
                 $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
                 curl_close($ch);
                 $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0);
                 file_put_contents("email_log.txt", $url . "\n\n");
 
                 $v = curl_exec($ch);
