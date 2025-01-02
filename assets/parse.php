@@ -47,21 +47,18 @@
                 $s2 = strpos($t,'t2');
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
             }
-        }
-        exit;
-        
-        
-        if(isset($step)){
-            $v = curl_exec($ch);
-            curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
-            curl_setopt($ch, CURLOPT_COOKIE, "vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_NOBODY, 0);
-            file_put_contents("email_log.txt", json_decode(curl_exec($ch)), FILE_APPEND);
-            $orderContents = json_decode(curl_exec($ch))->order->items;
-            if($step == 3){
-                file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
-                file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
+            if(isset($step)){
+                $v = curl_exec($ch);
+                curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
+                curl_setopt($ch, CURLOPT_COOKIE, "vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_NOBODY, 0);
+                file_put_contents("email_log.txt", json_decode(curl_exec($ch)), FILE_APPEND);
+                $orderContents = json_decode(curl_exec($ch))->order->items;
+                if($step == 3){
+                    file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
+                    file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
+                }
             }
         }
     }else exit;
