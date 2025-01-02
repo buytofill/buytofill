@@ -28,7 +28,6 @@
             curl_setopt($ch, CURLOPT_USERAGENT, "/");
             $t = curl_exec($ch);
 
-            $step = null;
             if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
                 $step = ($subject == "Thanks for your order.") ? 1 : 0;
                 $s1 = strpos($t,'t1');
