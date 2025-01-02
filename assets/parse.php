@@ -2,23 +2,32 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^Return-path:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
+    #Supports Google
+    #Add support for yahoo, outlook, icloud
+    #Add support for manually forwarded emails
     if($sender == "<forwarding-noreply@google.com>"){
         $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_exec($ch);
     }elseif($sender == "<BestBuyInfo@emailinfo.bestbuy.com>"){
-        /*$retailer = 0; # USE PDO
+        $retailer = 0;
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
+        $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
+
+        file_put_contents('email_log.txt', $ref);
+        file_put_contents('email_log.txt', $data, FILE_APPEND);
+        /* # USE PDO
         
-        file_put_contents('email_log.txt', $data);
+        
+        
         
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_NOBODY, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, "/");
         
-        $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
+        
         if($subject == "📦 Your package is going to be delivered. 📦"){
             preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
         }else{
