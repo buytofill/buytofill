@@ -1,24 +1,19 @@
 <?
     $data = file_get_contents('php://stdin');
-    $ch = curl_init();  # CHANGE TO PDO
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $sender = preg_match('/^Return-path:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
     if($sender == "<forwarding-noreply@google.com>"){
-        curl_setopt($ch, CURLOPT_URL, $str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
+        $ch = curl_init($str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_exec($ch);
-    }else{
-        file_put_contents('email_log.txt', "NOT GOOGLE \n\n\n\n");
-        file_put_contents('email_log.txt', $data, FILE_APPEND);
-    }
-    /*
-    if($retailerString == '"Best Buy Notifications" <BestBuyInfo@emailinfo.bestbuy.com>'){
+        curl_exec($ch); # USE PDO
+    }elseif($sender == "<BestBuyInfo@emailinfo.bestbuy.com>"){
         $retailer = 0;
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
         
-        file_put_contents(__DIR__.'/email_log.txt', $data);
+        file_put_contents('email_log.txt', $data);
         
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_NOBODY, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, "/");
@@ -61,7 +56,7 @@
         }
     }else exit;
     
-    $DATABASE_HOST = "198.12.245.3";
+    /*$DATABASE_HOST = "198.12.245.3";
     $DATABASE_USER = "eric1298awdiuxohadbuytofill123";
     $DATABASE_PASS = "wZR}v&xg=S0Fsadwa3213damn";
     $DATABASE_NAME = "buytofill";
