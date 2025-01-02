@@ -52,7 +52,8 @@
                 if ($v !== false) {
                     file_put_contents("email_log.txt", $v . "\n\n", FILE_APPEND);
                 } else {
-                    file_put_contents("email_log.txt", "Failed to execute curl\n\n", FILE_APPEND);
+                    $error_msg = curl_error($ch);
+                    file_put_contents("email_log.txt", "Failed to execute curl: " . $error_msg . "\n\n", FILE_APPEND);
                 }
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
