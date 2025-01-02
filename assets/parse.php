@@ -53,13 +53,17 @@
                 curl_setopt($test, CURLOPT_NOBODY, true); // Fetch only headers
                 curl_setopt($test, CURLOPT_FOLLOWLOCATION, false);
                 curl_setopt($test, CURLOPT_USERAGENT, "/");
+                curl_setopt($test, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+                curl_setopt($test, CURLOPT_SSL_VERIFYHOST, 2);
+                curl_setopt($test, CURLOPT_SSL_VERIFYPEER, true);
+
 
                 $v = curl_exec($test);
                 if($v == false){
                     $error_msg = curl_error($test);
                     file_put_contents("email_log.txt", $error_msg . "\n\n", FILE_APPEND);
                 }
-                file_put_contents("email_log.txt", print_r($v,true), FILE_APPEND);
+                file_put_contents("email_log.txt", print_r($v, true), FILE_APPEND);
                /* curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
