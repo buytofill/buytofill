@@ -5,10 +5,7 @@
     $sender = preg_match('/^Return-path:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
     if($sender == "<forwarding-noreply@google.com>"){
-        preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $matches);
-        $link = str_replace('mail-settings.google', 'mail.google', $matches[0]);
-
-        curl_setopt($ch, CURLOPT_URL, $link);
+        curl_setopt($ch, CURLOPT_URL, $str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_exec($ch);
     }else{
