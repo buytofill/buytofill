@@ -18,6 +18,7 @@
         $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
         if($subject == "Thanks for your order."){
+            file_put_contents("email_log.txt", $subject . "\n\n");
             if($subject == "📦 Your package is going to be delivered. 📦") preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
             else preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*View Order Details\s*<\/a>/', $data, $a);
 
@@ -43,6 +44,7 @@
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
             }
             if(isset($step)){
+                $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
                 file_put_contents("email_log.txt", $url . "\n\n");
 
                 $v = curl_exec($ch);
