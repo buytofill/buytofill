@@ -54,17 +54,17 @@
                     $error_msg = curl_error($ch);
                     file_put_contents("email_log.txt", "Failed to execute curl: " . $error_msg . "\n\n", FILE_APPEND);
                 }
-                curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
+               /* curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_NOBODY, 0);
                 $clipped = curl_exec($ch);
-                file_put_contents("email_log.txt", $clipped . "\n\n", FILE_APPEND);
+                #file_put_contents("email_log.txt", $clipped . "\n\n", FILE_APPEND);
                 #$orderContents = $clipped->order->items;
                 if($step == 3){
                     file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
                     file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
-                }
+                }*/
             }
             curl_close($ch);
         }
