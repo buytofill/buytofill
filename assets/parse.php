@@ -60,6 +60,7 @@
                     file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
                 }
             }
+            curl_close($ch);
         }
     }else exit;
     
@@ -164,8 +165,6 @@
         $stmt->close();
         $conn->close();
     }*/
-    
-    curl_close($ch);
     
     exit;
 ?>
