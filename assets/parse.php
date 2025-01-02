@@ -9,7 +9,7 @@
 
         if (preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $matches)) {
             $link = $matches[0];
-            $link = str_replace('mail-settings.google.com', 'mail.google.com', $link);
+            $link = str_replace('mail-settings.google', 'mail.google', $link);
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $link);
