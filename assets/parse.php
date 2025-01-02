@@ -33,9 +33,8 @@
             $t = curl_exec($ch);
             file_put_contents("email_log.txt", $t, FILE_APPEND);
 
-        }else{
-            exit;
         }
+        exit;
         if($subject == "Thanks for your order." || $subject == "Your Best Buy order has been canceled."){
             $step = ($subject == "Thanks for your order.") ? 1 : 0;
             $s1 = strpos($t,'t1');
