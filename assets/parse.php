@@ -28,6 +28,7 @@
             curl_setopt($ch, CURLOPT_NOBODY, 1);
             curl_setopt($ch, CURLOPT_USERAGENT, "/");
             $t = curl_exec($ch);
+            curl_setopt($ch, CURLOPT_NOBODY, 0);
             file_put_contents("email_log.txt", $t . "\n\n", FILE_APPEND);
 
             $step = null;
