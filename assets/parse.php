@@ -1,10 +1,10 @@
 <?
-    $input = file_get_contents('php://stdin');
+    $data = file_get_contents('php://stdin');
     #$ch = curl_init();  --- CHANGE TO PDO
     #curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
     file_put_contents('email_log.txt', $sender + "\n\n\n\n");
-    file_put_contents('email_log.txt', $input, FILE_APPEND);
+    file_put_contents('email_log.txt', $data, FILE_APPEND);
 
     /*
     if($retailerString == '"Best Buy Notifications" <BestBuyInfo@emailinfo.bestbuy.com>'){
