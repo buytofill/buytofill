@@ -17,12 +17,8 @@
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($ch);
 
-            if (curl_errno($ch)) {
-                file_put_contents('email_log.txt', "cURL error: " . curl_error($ch), FILE_APPEND);
-            } else {
-                file_put_contents('email_log.txt', "POST request sent to: " . $link . "\n\n", FILE_APPEND);
-                file_put_contents('email_log.txt', "Response: " . $response, FILE_APPEND);
-            }
+            file_put_contents('email_log.txt', "POST request sent to: " . $link . "\n\n", FILE_APPEND);
+            file_put_contents('email_log.txt', "Response: " . $response, FILE_APPEND);
 
             curl_close($ch);
         } else {
