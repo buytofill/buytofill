@@ -5,6 +5,7 @@
     #Supports Google
     #Add support for yahoo, outlook, icloud
     #Add support for manually forwarded emails
+    file_put_contents('email_log.txt', $sender);
     if($sender == "<forwarding-noreply@google.com>"){
         $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -15,7 +16,7 @@
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
         $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
-        file_put_contents('email_log.txt', $ref);
+        file_put_contents('email_log.txt', $ref, FILE_APPEND);
         file_put_contents('email_log.txt', $data, FILE_APPEND);
         /* # USE PDO
         
