@@ -48,13 +48,24 @@
                 file_put_contents("email_log.txt", $testt . "\n\n");
 
                 $test = curl_init($testt);
+                $proxy = "149.51.62.201:8679"; // Proxy IP and Port
+                $proxy_auth = "OC13515687:HYqgjfue"; // Proxy username and password
+
+                curl_setopt($test, CURLOPT_PROXY, $proxy); // Add proxy IP and Port
+                curl_setopt($test, CURLOPT_PROXYUSERPWD, $proxy_auth); // Add proxy authentication
+                curl_setopt($test, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
                 curl_setopt($test, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($test, CURLOPT_HEADER, true);
-                curl_setopt($test, CURLOPT_NOBODY, true);
+                #curl_setopt($test, CURLOPT_NOBODY, true);
                 curl_setopt($test, CURLOPT_FOLLOWLOCATION, false);
                 curl_setopt($test, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
                 curl_setopt($test, CURLOPT_SSL_VERIFYHOST, 2);
                 curl_setopt($test, CURLOPT_SSL_VERIFYPEER, true);
+                curl_setopt($test, CURLOPT_HTTPHEADER, [
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Connection: keep-alive",
+                ]);
 
 
                 $v = curl_exec($test);
