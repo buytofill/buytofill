@@ -51,7 +51,7 @@
 
                 $v = curl_exec($ch);
                 
-                file_put_contents("email_log.txt", print_r($v, true), FILE_APPEND);
+                file_put_contents("email_log.txt", "\n\n\n\n\n".$v, FILE_APPEND);
                 curl_close($ch);
 
                /* curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
