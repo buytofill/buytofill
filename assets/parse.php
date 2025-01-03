@@ -86,6 +86,7 @@
         date_default_timezone_set('America/New_York'); #see if needed for this line and below
         $date = date('mdHi');
         
+        #here
         $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
         if($step === 0){
             $stmt = $pdo->prepare("SELECT 1 FROM `retailerOrders` WHERE ref = ?");
