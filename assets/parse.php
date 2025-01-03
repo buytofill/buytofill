@@ -52,8 +52,10 @@
 
                 $v = curl_exec($ch); #file_put_contents("email_log.txt", "\n\n\n\n\n".$v, FILE_APPEND);
 
+                $vt = substr($v,strpos($v,'vt')+3,36);
+                file_put_contents("email_log.txt", $vt . "\n\n", FILE_APPEND);
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
-                curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
+                curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".$vt."; SID;");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_NOBODY, 0);
                 $clipped = curl_exec($ch);
