@@ -56,6 +56,7 @@
                 curl_setopt($test, CURLOPT_SSL_VERIFYHOST, 2);
                 curl_setopt($test, CURLOPT_SSL_VERIFYPEER, true);
                 curl_setopt($test, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                
 
                 $v = curl_exec($test);
                 $http_code = curl_getinfo($test, CURLINFO_HTTP_CODE);
