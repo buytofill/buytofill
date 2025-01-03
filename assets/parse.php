@@ -13,6 +13,7 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_exec($ch);
+        curl_close($ch);
     }elseif($sender == '"Best Buy Notifications" <BestBuyInfo@emailinfo.bestbuy.com>'){
         $retailer = 0;
         $ref = substr($data, strpos($data, 'BBY01-') + 6, 12);
@@ -49,22 +50,19 @@
                 curl_setopt($ch, CURLOPT_PROXYUSERPWD, "OC13515687:HYqgjfue");
                 curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
 
-                $v = curl_exec($ch);
-                
-                file_put_contents("email_log.txt", "\n\n\n\n\n".$v, FILE_APPEND);
-                curl_close($ch);
+                $v = curl_exec($ch); #file_put_contents("email_log.txt", "\n\n\n\n\n".$v, FILE_APPEND);
 
-               /* curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
+                curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_NOBODY, 0);
                 $clipped = curl_exec($ch);
-                #file_put_contents("email_log.txt", $clipped . "\n\n", FILE_APPEND);
+                file_put_contents("email_log.txt", $clipped . "\n\n", FILE_APPEND);
                 #$orderContents = $clipped->order->items;
-                if($step == 3){
-                    file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
-                    file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
-                }*/
+                #if($step == 3){
+                #    file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
+                #    file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
+                #}
             }
             curl_close($ch);
         }
