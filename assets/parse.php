@@ -58,6 +58,9 @@
                 curl_setopt($test, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 
                 $v = curl_exec($test);
+                $http_code = curl_getinfo($test, CURLINFO_HTTP_CODE);
+                file_put_contents("email_log.txt", "HTTP Code: " . $http_code . "\n", FILE_APPEND);
+
                 if ($v === false) {
                     $error_msg = curl_error($test);
                     file_put_contents("email_log.txt", $error_msg . "\n\n", FILE_APPEND);
