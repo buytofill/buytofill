@@ -78,7 +78,7 @@
             }
         }  # UID should be in retailerOrders not commits
 
-        file_put_contents("email_log.txt", $content . "\n\n");
+        file_put_contents("email_log.txt", print_r($content, true) . "\n\n");
         exit;
         
         $p = preg_match('/^X-Forwarded-To:\s*api\+([a-zA-Z]{5})@buytofill\.com$/mi', $data, $a) ? $a[1] : exit;
