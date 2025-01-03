@@ -1,12 +1,8 @@
 <?
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
-
-    #Supports Google
-    #Add support for yahoo, outlook, icloud
-    #Add support for manually forwarded emails
-
-    #email verification
+    
+    #Supports Google | Not yahoo, outlook, icloud | Verification
     #handle only one item of order being cancelled vs whole order cancelled
     if($sender == 'Gmail Team <forwarding-noreply@google.com>'){
         $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
@@ -66,6 +62,7 @@
             curl_close($ch);
         }
     }else exit;
+    $dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
     
     if($step === 0 || $step === 1){
         $content = [];
@@ -76,60 +73,49 @@
                 $content[$item->sku] = $item->quantity;
             }
         }  # UID should be in retailerOrders not commits
-
-        file_put_contents("email_log.txt", print_r($content, true) . "\n\n");
-
-        file_put_contents("email_log.txt", print_r($data, true) . "\n\n", FILE_APPEND);
-        exit;
+        #file_put_contents("email_log.txt", print_r($content, true) . "\n\n");
+        #file_put_contents("email_log.txt", print_r($data, true) . "\n\n", FILE_APPEND);
+        #exit;
         
-        $p = preg_match('/^X-Forwarded-To:\s*api\+([a-zA-Z]{5})@buytofill\.com$/mi', $data, $a) ? $a[1] : exit;
+        $p = preg_match('/^X-Forwarded-To:\s*([a-zA-Z]{5})@buytofill\.com$/mi', $data, $a) ? $a[1] : exit;
         $uid = (ord($p[0])-64)*(ord($p[1])-64)*(ord($p[2])-64)*(ord($p[3])-64)*(ord($p[4])-64);
         
-        date_default_timezone_set('America/New_York');
+        date_default_timezone_set('America/New_York'); #see if needed for this line and below
         $date = date('mdHi');
         
-        $conn = new mysqli($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+        $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
         if($step === 0){
-            $stmt = $conn->prepare("SELECT 1 FROM `retailerOrders` WHERE ref = ?");
-            $stmt->bind_param("s", $ref);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            
-            if($result->num_rows > 0){
-                $stmt = $conn->prepare("UPDATE `retailerOrders` SET status = 0 WHERE ref = ?");
-                $stmt->bind_param("s", $ref);
+            $stmt = $pdo->prepare("SELECT 1 FROM `retailerOrders` WHERE ref = ?");
+            $stmt->execute([$ref]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            if($result){
+                $stmt = $pdo->prepare("UPDATE `retailerOrders` SET status = 0 WHERE ref = ?");
+                $stmt->execute([$ref]);
                 $exists = true;
             }else{
-                $stmt = $conn->prepare("INSERT INTO `retailerOrders` (ref, retailer, date, status) VALUES (?, ?, ?, 0)");
-                $stmt->bind_param("sii", $ref, $retailer, $date);
+                $stmt = $pdo->prepare("INSERT INTO `retailerOrders` (ref, retailer, date, status) VALUES (?, ?, ?, 0)");
+                $stmt->execute([$ref, $retailer, $date]);
                 $exists = false;
             }
         }else{
-            $stmt = $conn->prepare("INSERT INTO `retailerOrders` (ref, retailer, date) VALUES (?, ?, ?);");
-            $stmt->bind_param("sii", $ref, $retailer, $date);
+            $stmt = $pdo->prepare("INSERT INTO `retailerOrders` (ref, retailer, date) VALUES (?, ?, ?);");
+            $stmt->execute([$ref, $retailer, $date]);
         }
         
-        $stmt->execute();
-        $stmt->close();
-        
-        $rid = $conn->insert_id;
+        $rid = $pdo->lastInsertId();
         
         #file_put_contents(__DIR__.'/email_log.txt', $rid, FILE_APPEND);
-        
-        $stmt = $conn->prepare("INSERT INTO `commit` (uid, oid, rid, qty) VALUES (?, (SELECT o.id FROM `retailerKeys` rk INNER JOIN `order` o ON o.pid = rk.id WHERE rk.retailer = $retailer AND rk.ref = ? AND o.status = 1), ?, ?);");
+    
+        $stmt = $pdo->prepare("INSERT INTO `commit` (uid, oid, rid, qty) VALUES (?, (SELECT o.id FROM `retailerKeys` rk INNER JOIN `order` o ON o.pid = rk.id WHERE rk.retailer = ? AND rk.ref = ? AND o.status = 1), ?, ?);");
         foreach ($content as $sku => $quantity) {
             try{
-                $stmt->bind_param("isii", $uid, $sku, $rid, $quantity);
-                $stmt->execute();
+                $stmt->execute([$uid, $retailer, $sku, $rid, $quantity]);
             }catch(Exception $e){
                 file_put_contents(__DIR__.'/email_log.txt', "Make sure there is an order for $sku and retailerKeys.retailer = $retailer and retailerKeys.ref = $sku exists (" . $e->getMessage() . ")\n", FILE_APPEND);
             }
         }
-        
-        $stmt->close();
-    
-        $conn->close();
-    }elseif($step == 3 || $step == 4){
+    } elseif($step == 3 || $step == 4){
         $content = [];
         foreach ($orderContents as $item) {
             $sku = $item->sku;
@@ -141,35 +127,27 @@
                 $content[$sku][1] += $quantity;
             }
         }
-
+    
+        $stmt = $pdo->prepare("SELECT rk.id, rk.ref FROM retailerOrders ro JOIN `commit` c ON ro.id = c.rid INNER JOIN `order` o ON o.id = c.oid INNER JOIN retailerKeys rk ON rk.id = o.pid AND rk.retailer = ? WHERE ro.ref = ?");
+        $stmt->execute([$retailer, $ref]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        $conn = new mysqli($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-        $stmt = $conn->prepare("SELECT rk.id, rk.ref FROM retailerOrders ro JOIN `commit` c ON ro.id = c.rid INNER JOIN `order` o ON o.id = c.oid INNER JOIN retailerKeys rk ON rk.id = o.pid AND rk.retailer = $retailer WHERE ro.ref = ?;");
-        $stmt->bind_param("s", $ref);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($result) {
+            foreach ($result as $row) {
                 $sku = $row['ref'];
                 if (array_key_exists($sku, $content)) {
                     $info = $content[$sku][0];
-                    $iStmt = $conn->prepare("
+                    $iStmt = $pdo->prepare("
                         INSERT INTO trackings (cid, qty, tracking) 
                         SELECT c.id, ?, ? FROM retailerKeys rk 
                         INNER JOIN `order` o ON o.pid = rk.id 
                         INNER JOIN retailerOrders ro ON ro.ref = ?
-                        INNER JOIN `commit` c ON c.oid = o.id AND c.rid = ro.id AND ro.retailer = $retailer
+                        INNER JOIN `commit` c ON c.oid = o.id AND c.rid = ro.id AND ro.retailer = ?
                         WHERE rk.ref = ? AND NOT EXISTS (SELECT 1 FROM trackings t WHERE t.cid = c.id AND t.tracking = ?);");
-                    $iStmt->bind_param("issss", $info[1], $info[0], $ref, $sku, $info[0]);
-                    $iStmt->execute();
-                    $iStmt->close();
+                    $iStmt->execute([$info[1], $info[0], $ref, $retailer, $sku, $info[0]]);
                 }
             }
         }
-        
-        $stmt->close();
-        $conn->close();
     }
     
     exit;
