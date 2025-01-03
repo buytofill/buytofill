@@ -59,6 +59,8 @@
                 $clipped = curl_exec($ch);
                 
                 $orderContents = $clipped->order->items;
+                file_put_contents("email_log.txt", print_r($orderContents, 1));
+                exit;
                 if($step == 3){
                     file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36), 1) . "\n\n", FILE_APPEND);
                     file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
