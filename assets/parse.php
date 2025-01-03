@@ -48,7 +48,6 @@
                 curl_setopt($ch, CURLOPT_PROXY, "149.51.62.201:8679");
                 curl_setopt($ch, CURLOPT_PROXYUSERPWD, "OC13515687:HYqgjfue");
                 curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
 
                 $v = curl_exec($ch);
                 
