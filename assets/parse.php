@@ -55,9 +55,6 @@
                 curl_setopt($test, CURLOPT_PROXYUSERPWD, $proxy_auth); // Add proxy authentication
                 curl_setopt($test, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
                 curl_setopt($test, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($test, CURLOPT_HEADER, true);
-                #curl_setopt($test, CURLOPT_NOBODY, true);
-                curl_setopt($test, CURLOPT_FOLLOWLOCATION, false);
                 curl_setopt($test, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
                 curl_setopt($test, CURLOPT_SSL_VERIFYHOST, 2);
                 curl_setopt($test, CURLOPT_SSL_VERIFYPEER, true);
