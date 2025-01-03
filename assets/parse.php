@@ -56,10 +56,10 @@
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".$vt.";");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_NOBODY, 0);
-                $clipped = curl_exec($ch);
+                $clipped = json_decode(curl_exec($ch));
                 
                 file_put_contents("email_log.txt", print_r($clipped, 1) . "\n\n");
-                $orderContents = $clipped['order']['items'];
+                $orderContents = $clipped->order->items;
                 file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
                 exit;
                 if($step == 3){
