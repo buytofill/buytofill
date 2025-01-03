@@ -54,12 +54,12 @@
                 $v = curl_exec($ch);
                 
                 if ($v == false) {
-                    $error_msg = curl_error($test);
+                    $error_msg = curl_error($ch);
                     file_put_contents("email_log.txt", $error_msg . "\n\n", FILE_APPEND);
                 } else {
                     file_put_contents("email_log.txt", print_r($v, true), FILE_APPEND);
                 }
-                curl_close($test);
+                curl_close($ch);
 
                /* curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
