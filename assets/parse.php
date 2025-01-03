@@ -44,26 +44,28 @@
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
             }
             if(isset($step)){
-                $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
                 $testt = "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=fcu8nLEiGrEviWhv6eOeO0jFssFAVe3GY2fZig5fK38H1iTom1fa8fKVju14%252f6W0vneXt3P3tFmPKubuEhIREw&t2=NTBFMTk5QzgyRUY5Nzc4N0FENTRDNzE3NjNCMkRBNkI";
                 file_put_contents("email_log.txt", $testt . "\n\n");
+
                 $test = curl_init($testt);
                 curl_setopt($test, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($test, CURLOPT_HEADER, true);
-                curl_setopt($test, CURLOPT_NOBODY, true); // Fetch only headers
+                curl_setopt($test, CURLOPT_NOBODY, true);
                 curl_setopt($test, CURLOPT_FOLLOWLOCATION, false);
-                curl_setopt($test, CURLOPT_USERAGENT, "/");
-                curl_setopt($test, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+                curl_setopt($test, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
                 curl_setopt($test, CURLOPT_SSL_VERIFYHOST, 2);
                 curl_setopt($test, CURLOPT_SSL_VERIFYPEER, true);
-
+                curl_setopt($test, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 
                 $v = curl_exec($test);
-                if($v == false){
+                if ($v === false) {
                     $error_msg = curl_error($test);
                     file_put_contents("email_log.txt", $error_msg . "\n\n", FILE_APPEND);
+                } else {
+                    file_put_contents("email_log.txt", print_r($v, true), FILE_APPEND);
                 }
-                file_put_contents("email_log.txt", print_r($v, true), FILE_APPEND);
+                curl_close($test);
+
                /* curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
                 curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".substr($v,strpos($v,'vt')+3,36)."; SID;");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
