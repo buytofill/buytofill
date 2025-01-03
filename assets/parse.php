@@ -48,12 +48,12 @@
                 file_put_contents("email_log.txt", $testt . "\n\n");
 
                 $test = curl_init($testt);
-                /*$proxy = "149.51.62.201:8679"; // Proxy IP and Port
+                $proxy = "149.51.62.201:8679"; // Proxy IP and Port
                 $proxy_auth = "OC13515687:HYqgjfue"; // Proxy username and password
 
                 curl_setopt($test, CURLOPT_PROXY, $proxy); // Add proxy IP and Port
                 curl_setopt($test, CURLOPT_PROXYUSERPWD, $proxy_auth); // Add proxy authentication
-                curl_setopt($test, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);*/
+                curl_setopt($test, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
                 curl_setopt($test, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($test, CURLOPT_HEADER, true);
                 #curl_setopt($test, CURLOPT_NOBODY, true);
