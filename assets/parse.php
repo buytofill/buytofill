@@ -44,21 +44,14 @@
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
             }
             if(isset($step)){
-                $proxy = "149.51.62.201:8679"; // Proxy IP and Port
-                $proxy_auth = "OC13515687:HYqgjfue"; // Proxy username and password
-
-                curl_setopt($ch, CURLOPT_PROXY, $proxy); // Add proxy IP and Port
-                curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxy_auth); // Add proxy authentication
+                curl_setopt($ch, CURLOPT_PROXY, "149.51.62.201:8679");
+                curl_setopt($ch, CURLOPT_PROXYUSERPWD, "OC13515687:HYqgjfue");
                 curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
 
                 $v = curl_exec($ch);
                 
-                if ($v == false) {
-                    $error_msg = curl_error($ch);
-                    file_put_contents("email_log.txt", $error_msg . "\n\n", FILE_APPEND);
-                } else {
-                    file_put_contents("email_log.txt", print_r($v, true), FILE_APPEND);
-                }
+                file_put_contents("email_log.txt", print_r($v, true), FILE_APPEND);
                 curl_close($ch);
 
                /* curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
