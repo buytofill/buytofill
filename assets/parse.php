@@ -20,7 +20,6 @@
         $subject = preg_match('/^Subject:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
         if($subject == "Thanks for your order."){
-            file_put_contents("email_log.txt", $subject . "\n\n");
             if($subject == "📦 Your package is going to be delivered. 📦") preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*Track Package\s*<\/a>/', $data, $a);
             else preg_match('/<a href="https:\/\/click\.emailinfo2\.bestbuy\.com\/\?qs=([a-zA-Z0-9]+)".*?>\s*View Order Details\s*<\/a>/', $data, $a);
 
@@ -53,24 +52,21 @@
                 $v = curl_exec($ch); #file_put_contents("email_log.txt", "\n\n\n\n\n".$v, FILE_APPEND);
 
                 $vt = substr($v,strpos($v,'vt')+3,36);
-                file_put_contents("email_log.txt", $vt . "\n\n", FILE_APPEND);
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/api/v1/orders/BBY01-".$ref);
-                curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".$vt."; SID;");
+                curl_setopt($ch, CURLOPT_COOKIE, "CTT;vt=".$vt.";");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_NOBODY, 0);
                 $clipped = curl_exec($ch);
-                file_put_contents("email_log.txt", $clipped . "\n\n", FILE_APPEND);
-                #$orderContents = $clipped->order->items;
-                #if($step == 3){
-                #    file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36)."; SID;", 1), FILE_APPEND);
-                #    file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
-                #}
+                
+                $orderContents = $clipped->order->items;
+                if($step == 3){
+                    file_put_contents("email_log.txt", print_r(substr($v,strpos($v,'vt')+3,36), 1) . "\n\n", FILE_APPEND);
+                    file_put_contents("email_log.txt", print_r($orderContents, 1), FILE_APPEND);
+                }
             }
             curl_close($ch);
         }
     }else exit;
-    
-    /*
     
     if($step === 0 || $step === 1){
         $content = [];
@@ -81,6 +77,9 @@
                 $content[$item->sku] = $item->quantity;
             }
         }  # UID should be in retailerOrders not commits
+
+        file_put_contents("email_log.txt", $content . "\n\n");
+        exit;
         
         $p = preg_match('/^X-Forwarded-To:\s*api\+([a-zA-Z]{5})@buytofill\.com$/mi', $data, $a) ? $a[1] : exit;
         $uid = (ord($p[0])-64)*(ord($p[1])-64)*(ord($p[2])-64)*(ord($p[3])-64)*(ord($p[4])-64);
@@ -170,7 +169,7 @@
         
         $stmt->close();
         $conn->close();
-    }*/
+    }
     
     exit;
 ?>
