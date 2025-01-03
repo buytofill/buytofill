@@ -44,31 +44,15 @@
                 curl_setopt($ch, CURLOPT_URL, "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=".substr($t,$s1+5,$s2-$s1-18)."&t2=".substr($t,$s2+5,43));
             }
             if(isset($step)){
-                $testt = "https://www.bestbuy.com/profile/ss/orders/email-redirect/order-status?t1=fcu8nLEiGrEviWhv6eOeO0jFssFAVe3GY2fZig5fK38H1iTom1fa8fKVju14%252f6W0vneXt3P3tFmPKubuEhIREw&t2=NTBFMTk5QzgyRUY5Nzc4N0FENTRDNzE3NjNCMkRBNkI";
-                file_put_contents("email_log.txt", $testt . "\n\n");
-
-                $test = curl_init($testt);
                 $proxy = "149.51.62.201:8679"; // Proxy IP and Port
                 $proxy_auth = "OC13515687:HYqgjfue"; // Proxy username and password
 
-                curl_setopt($test, CURLOPT_PROXY, $proxy); // Add proxy IP and Port
-                curl_setopt($test, CURLOPT_PROXYUSERPWD, $proxy_auth); // Add proxy authentication
-                curl_setopt($test, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
-                curl_setopt($test, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($test, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
-                curl_setopt($test, CURLOPT_SSL_VERIFYHOST, 2);
-                curl_setopt($test, CURLOPT_SSL_VERIFYPEER, true);
-                curl_setopt($test, CURLOPT_HTTPHEADER, [
-                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                    "Accept-Language: en-US,en;q=0.5",
-                    "Connection: keep-alive",
-                ]);
+                curl_setopt($ch, CURLOPT_PROXY, $proxy); // Add proxy IP and Port
+                curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxy_auth); // Add proxy authentication
+                curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
 
-
-                $v = curl_exec($test);
-                $http_code = curl_getinfo($test, CURLINFO_HTTP_CODE);
-                file_put_contents("email_log.txt", "HTTP Code: " . $http_code . "\n", FILE_APPEND);
-
+                $v = curl_exec($ch);
+                
                 if ($v == false) {
                     $error_msg = curl_error($test);
                     file_put_contents("email_log.txt", $error_msg . "\n\n", FILE_APPEND);
