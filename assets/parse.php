@@ -81,7 +81,7 @@
         #file_put_contents("email_log.txt", print_r($data, true) . "\n\n", FILE_APPEND);
         #exit;
         
-        $p = get_env('USER');
+        $p = getenv('USER');
         $uid = (ord($p[0])-64)*(ord($p[1])-64)*(ord($p[2])-64)*(ord($p[3])-64)*(ord($p[4])-64);
         $date = date('mdHi');
         
