@@ -5,7 +5,7 @@
     #print_r(getenv(), 1);
     file_put_contents("email_log.txt", getenv('USER') . "\n");
     file_put_contents("email_log.txt", getenv('SENDER') . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", getenv('SENDER') . "\n", FILE_APPEND);
+    file_put_contents("email_log.txt", getenv() . "\n", FILE_APPEND);
     exit;
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
