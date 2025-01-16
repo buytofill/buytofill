@@ -2,10 +2,8 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
     
-    file_put_contents("email_log.txt", print_r($_ENV, 1));
-    file_put_contents("email_log.txt", print_r(getenv(), 1) . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", print_r($_SERVER, 1) . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", $_SERVER['USER'] . "\n", FILE_APPEND);
+    file_put_contents("email_log.txt", getenv('USER') . "\n");
+    file_put_contents("email_log.txt", getenv('SENDER') . "\n", FILE_APPEND);
     exit;
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
@@ -83,7 +81,7 @@
         #file_put_contents("email_log.txt", print_r($data, true) . "\n\n", FILE_APPEND);
         #exit;
         
-        $p = $_SERVER['USER'];
+        $p = get_env('USER');
         $uid = (ord($p[0])-64)*(ord($p[1])-64)*(ord($p[2])-64)*(ord($p[3])-64)*(ord($p[4])-64);
         $date = date('mdHi');
         
