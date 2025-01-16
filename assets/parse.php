@@ -2,7 +2,7 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
-    file_put_contents("email_log.txt", print_r($_SERVER['USER']) . "\n");
+    file_put_contents("email_log.txt", $_SERVER['USER']);
     file_put_contents("email_log.txt", print_r(getenv(), 1) . "\n", FILE_APPEND);
     exit;
     
