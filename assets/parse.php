@@ -2,7 +2,7 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
-    file_put_contents("email_log.txt", getenv('user'), FILE_APPEND);
+    file_put_contents("email_log.txt", get_current_user());
     exit;
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
