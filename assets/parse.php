@@ -3,9 +3,9 @@
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
     file_put_contents("email_log.txt", get_current_user() . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", getenv() . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", print_r($_ENV) . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", print_r($_SERVER) . "\n", FILE_APPEND);
+    file_put_contents("email_log.txt", print_r(getenv(), 1) . "\n", FILE_APPEND);
+    file_put_contents("email_log.txt", print_r($_ENV, 1) . "\n", FILE_APPEND);
+    file_put_contents("email_log.txt", print_r($_SERVER, 1) . "\n", FILE_APPEND);
     exit;
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
