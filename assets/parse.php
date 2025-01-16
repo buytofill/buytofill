@@ -1,4 +1,6 @@
 <?
+    print(getenv('user'));
+    exit;
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
