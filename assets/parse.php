@@ -1,12 +1,8 @@
 <?
-    file_put_contents("email_log.txt", getenv('user'));
-    print(getenv('user'));
-    print(getenv('pass'));
-    exit;
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
 
-    
+    file_put_contents("email_log.txt", getenv('user'));
     exit;
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
