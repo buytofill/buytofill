@@ -2,10 +2,9 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
     
-    print_r(getenv('user'), 1);
-    exit;
     file_put_contents("email_log.txt", getenv('USER') . "\n");
     file_put_contents("email_log.txt", getenv('SENDER') . "\n", FILE_APPEND);
+    file_put_contents("email_log.txt", getenv() . "\n", FILE_APPEND);
     exit;
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
