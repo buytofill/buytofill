@@ -2,11 +2,6 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
     
-    file_put_contents("email_log.txt", getenv('USER') . "\n");
-    file_put_contents("email_log.txt", getenv('SENDER') . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", print_r(getenv(), 1) . "\n", FILE_APPEND);
-    exit;
-    
     #Supports Google | Not yahoo, outlook, icloud | Verification
     #handle only one item of order being cancelled vs whole order cancelled
     if($sender == 'Gmail Team <forwarding-noreply@google.com>'){
@@ -86,7 +81,6 @@
         $uid = (ord($p[0])-64)*(ord($p[1])-64)*(ord($p[2])-64)*(ord($p[3])-64)*(ord($p[4])-64);
         $date = date('mdHi');
         
-        #here
         $pdo = new PDO($dsn, getenv('u'), getenv('p'));
         if($step === 0){
             $stmt = $pdo->prepare("SELECT 1 FROM `retailerOrders` WHERE ref = ?");
