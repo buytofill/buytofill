@@ -4,8 +4,6 @@
     
     file_put_contents("email_log.txt", print_r($_ENV, 1));
     file_put_contents("email_log.txt", print_r(getenv(), 1) . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", $_ENV['user'] . "\n", FILE_APPEND);
-    file_put_contents("email_log.txt", $_ENV['sender'] . "\n", FILE_APPEND);
     file_put_contents("email_log.txt", print_r($_SERVER, 1) . "\n", FILE_APPEND);
     file_put_contents("email_log.txt", $_SERVER['USER'] . "\n", FILE_APPEND);
     exit;
