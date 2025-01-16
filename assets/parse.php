@@ -87,7 +87,7 @@
         $date = date('mdHi');
         
         #here
-        $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
+        $pdo = new PDO($dsn, getenv('u'), getenv('p'));
         if($step === 0){
             $stmt = $pdo->prepare("SELECT 1 FROM `retailerOrders` WHERE ref = ?");
             $stmt->execute([$ref]);
