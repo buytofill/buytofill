@@ -59,6 +59,9 @@
             }
         }
         curl_close($ch);
+    }elseif($sender == 'Target <orders@oe1.target.com>'){
+        $retailer = 1;
+        file_put_contents("email_log.txt", $data);
     }else exit;
     $dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
     
