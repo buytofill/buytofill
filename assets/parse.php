@@ -2,7 +2,7 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
     
-    file_put_contents("email_log.txt", $sender);
+    file_put_contents("email_log.txt", $data);
     #Supports Google | Not yahoo, outlook, icloud | Verification
     #handle only one item of order being cancelled vs whole order cancelled
     if($sender == 'Gmail Team <forwarding-noreply@google.com>'){
