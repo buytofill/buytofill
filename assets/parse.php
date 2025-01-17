@@ -2,6 +2,7 @@
     $data = file_get_contents('php://stdin');
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
     
+    file_put_contents("email_log.txt", $sender);
     #Supports Google | Not yahoo, outlook, icloud | Verification
     #handle only one item of order being cancelled vs whole order cancelled
     if($sender == 'Gmail Team <forwarding-noreply@google.com>'){
@@ -61,7 +62,7 @@
         curl_close($ch);
     }elseif($sender == 'Target <orders@oe1.target.com>'){
         $retailer = 1;
-        file_put_contents("email_log.txt", $data);
+        file_put_contents("email_log.txt", $data, FILE_APPEND);
     }else exit;
     $dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
     
