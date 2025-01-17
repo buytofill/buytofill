@@ -60,7 +60,7 @@
             }
         }
         curl_close($ch);
-    }elseif($sender == 'Target <orders@oe1.target.com>'){
+    }elseif($sender == '"Target" <orders@oe1.target.com>'){
         $retailer = 1;
         file_put_contents("email_log.txt", $data, FILE_APPEND);
     }else exit;
