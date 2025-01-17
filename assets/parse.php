@@ -111,7 +111,7 @@
                 file_put_contents(__DIR__.'/email_log.txt', "Make sure there is an order for $sku and retailerKeys.retailer = $retailer and retailerKeys.ref = $sku exists (" . $e->getMessage() . ")\n");
             }
         }
-    } elseif($step == 3 || $step == 4){
+    }elseif($step == 3 || $step == 4){
         $content = [];
         foreach ($orderContents as $item) {
             $sku = $item->sku;
