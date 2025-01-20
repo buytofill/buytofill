@@ -1,0 +1,14 @@
+@font-face{font-family:'pjs';src:url(pjs.v1.woff2);font-weight:200}
+@font-face{font-family:'pjs';src:url(pjs.v1.woff2);font-weight:300}
+@font-face{font-family:'pjs';src:url(pjs.v1.woff2);font-weight:400}
+@font-face{font-family:'pjs';src:url(pjs.v1.woff2);font-weight:500}
+@font-face{font-family:'pjs';src:url(pjs.v1.woff2);font-weight:600}
+@font-face{font-family:'pjs';src:url(pjs.v1.woff2);font-weight:700}
+@font-face{font-family:'pjs';src:url(pjs.v1.woff2);font-weight:800}
+
+body{height:100vh;position:fixed;width:100vw;margin:0}
+button,a{cursor:pointer}
+div{box-sizing:border-box}
+input,button{outline:none;border:0}
+a{text-decoration:0;color:inherit}
+button,a,h1,h2,h3,h4,h5,h6,p,span,div,header,input{font-family:"pjs",sans-serif}
