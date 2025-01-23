@@ -1,5 +1,6 @@
 <?
     $data = file_get_contents('php://stdin');
+    file_put_contents("email_log.txt", $data);
     $sender = preg_match('/^From:\s*(.*)$/mi', $data, $a) ? $a[1] : '';
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
