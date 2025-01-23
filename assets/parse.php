@@ -4,7 +4,7 @@
     
     #Supports Google | Not yahoo, outlook, icloud | Verification
     #handle only one item of order being cancelled vs whole order cancelled
-    file_put_contents("email_log.txt", $sender);
+    file_put_contents("email_log.txt", $sender . "\n\n");
     if($sender == 'Gmail Team <forwarding-noreply@google.com>'){
         file_put_contents("email_log.txt", $data, FILE_APPEND);
         $ch = curl_init(str_replace('mail-settings.google', 'mail.google', preg_match('/https:\/\/mail-settings\.google\.com\/mail\/vf-[^\s"]+/i', $data, $m) ? $m[0] : ''));
