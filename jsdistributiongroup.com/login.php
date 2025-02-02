@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'email' => $user['email'],
             'role' => $user['role']
         ];
+        
         header('Location: .');
         exit;
     }else{
