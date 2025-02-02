@@ -4,7 +4,7 @@ if($_SESSION['user']['userStatus'] == "emailAutomaticallySent"){
     $verificationLink = "https://www.jsdistributiongroup.com/actions/verify.php?token=".$_SESSION['user']['emailToken'];
 
     $ch = curl_init(); curl_setopt($ch, CURLOPT_URL, 'https://api.brevo.com/v3/smtp/email');
-    $headers = ['api-key: xkeysib----jADZ7oXwgtEtR3it', 'Content-Type: application/json', 'Accept: application/json'];
+    $headers = ['AK', 'Content-Type: application/json', 'Accept: application/json'];
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     $data = [
         "sender" => ["name" => "JS Distribution", "email" => "noreply@jsdistributiongroup.com"],
