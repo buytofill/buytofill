@@ -42,6 +42,12 @@
         header a{display:flex}
         header a:not(:last-child){margin-bottom:1.5rem}
         main{padding:2rem}
+        #top{display:flex;justify-content:space-between;padding:1.5rem 0}
+        #top span{font-weight:700;font-size:.8rem;color:#aaa}
+        #top div a{background:#eee;padding:.5rem 1rem;border-radius:.4rem;font-weight:500;font-size:.9rem;color:#282828}
+        #top div a:last-child{margin-left:.5rem;background:#282828;color:#fff}
+        #filters{display:flex;justify-content:space-between;padding:1rem 0}
+
     </style>
 </head>
 <body>
@@ -86,9 +92,21 @@
         </header>
         <main>
             <div id=top>
+                <span>BROWSE</span>
+                <div>
+                    <a>Manage</a>
+                    <a>Invite</a>
+                </div>
             </div>
-            <h1>Stock</h1>
-            <div id=filters></div>
+            <h1>Stocklist</h1>
+            <div id=filters>
+                <div>
+                    <a>Filter</a>
+                </div>
+                <div>
+                    <a>Find</a>
+                </div>
+            </div> 
             <table>
             </table>
         </main>
