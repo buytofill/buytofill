@@ -1,6 +1,8 @@
 <?php 
     session_start();
 
+    echo 'here';
+    exit;
     echo "user: " . var_export(getenv('user'), true) . "<br>";
 echo "pass: " . var_export(getenv('pass'), true) . "<br>";
 exit;
