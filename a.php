@@ -23,7 +23,7 @@
         }
         #base{height:100vh;display:flex}
         header{margin:auto 1rem}
-        aside{width:clamp(20rem, 100%, 30vw);margin:auto;padding:2rem}
+        aside{margin:auto;padding:clamp(3vw, 4vw, 4vw)}
         aside>div{max-width:clamp(3rem, 100%, 25rem);margin:auto}
         aside>div>a{display:flex;box-sizing:border-box;border:1px solid transparent;margin:auto;background:#282828;font-size:.8rem;color:#fff;padding:.6rem;border-radius:.4rem}
         aside>div>a>span{text-align:center;width:100%}
@@ -41,7 +41,7 @@
         header svg{color:rgb(141, 144, 151)}
         header a{display:flex}
         header a:not(:last-child){margin-bottom:1.5rem}
-        main{padding:2rem}
+        main{padding:clamp(3vw, 4vw, 4vw)}
         #top{display:flex;justify-content:space-between;padding:1.5rem 0}
         #top span{font-weight:700;font-size:.8rem;color:#aaa}
         #top div a{background:#eee;padding:.5rem 1rem;border-radius:.4rem;font-weight:500;font-size:.9rem;color:#282828}
