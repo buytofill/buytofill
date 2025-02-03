@@ -9,7 +9,6 @@
     $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
     echo 'here<br>';
     
-    exit;
 ?>
 <!DOCTYPE html>
 <html lang="en">
