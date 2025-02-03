@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require('req/head.php');
+    require(__DIR__ . '/req/head.php');
 
     $dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
     $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
