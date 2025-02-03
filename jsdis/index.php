@@ -1,18 +1,19 @@
 <?php 
     session_start();
-
-    echo 'here';
-    exit;
-    #echo "user: " . var_export(getenv('user'), true) . "<br>";
-#echo "pass: " . var_export(getenv('pass'), true) . "<br>";
-#exit;
-
-    #$dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
-    #print(getenv('user'))
-    #$pdo = new PDO($dsn, getenv('user'), getenv('pass'));
-
-    echo 'here';
-
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    
+    echo 'here1<br>';
+    
+    $dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
+    try {
+        $pdo = new PDO($dsn, getenv('user'), getenv('pass'), [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]);
+        echo 'here<br>';
+    } catch (PDOException $e) {
+        echo "Database error: " . $e->getMessage();
+    }
     exit;
 ?>
 <!DOCTYPE html>
