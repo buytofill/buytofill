@@ -1,7 +1,9 @@
 <?php 
     session_start();
 
-    echo 'here1';
+    echo "user: " . var_export(getenv('user'), true) . "<br>";
+echo "pass: " . var_export(getenv('pass'), true) . "<br>";
+exit;
 
     $dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
     print(getenv('user'))
