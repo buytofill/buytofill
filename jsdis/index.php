@@ -2,8 +2,8 @@
     session_start();
 
     echo 'here1';
-    
-    $dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
+
+    $dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
     $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
 
     echo 'here';
