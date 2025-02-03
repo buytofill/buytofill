@@ -6,14 +6,11 @@
     echo 'here1<br>';
     
     $dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
-    try {
-        $pdo = new PDO($dsn, getenv('user'), getenv('pass'), [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        ]);
-        echo 'here<br>';
-    } catch (PDOException $e) {
-        echo "Database error: " . $e->getMessage();
-    }
+    $pdo = new PDO($dsn, getenv('user'), getenv('pass'), [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    ]);
+    echo 'here<br>';
+    
     exit;
 ?>
 <!DOCTYPE html>
