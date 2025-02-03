@@ -1,5 +1,6 @@
 <?php
 session_start();
+$dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
 
 if (isset($_SESSION['user']['id'])) {
     header('Location: .');

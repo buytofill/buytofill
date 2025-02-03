@@ -1,6 +1,9 @@
 <?php 
 session_start();
 require('req/head.php')
+
+$dsn = "mysql:host=127.0.0.1;dbname=buytofill;charset=utf8mb4";
+$pdo = new PDO($dsn, getenv('user'), getenv('pass'));
 ?>
     <title>JS Distribution</title>
     <script src="https://unpkg.com/i18next/dist/umd/i18next.js"></script>
