@@ -3,13 +3,13 @@
 
     echo 'here';
     exit;
-    echo "user: " . var_export(getenv('user'), true) . "<br>";
-echo "pass: " . var_export(getenv('pass'), true) . "<br>";
-exit;
+    #echo "user: " . var_export(getenv('user'), true) . "<br>";
+#echo "pass: " . var_export(getenv('pass'), true) . "<br>";
+#exit;
 
-    $dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
-    print(getenv('user'))
-    $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
+    #$dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
+    #print(getenv('user'))
+    #$pdo = new PDO($dsn, getenv('user'), getenv('pass'));
 
     echo 'here';
 
