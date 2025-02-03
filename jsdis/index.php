@@ -4,11 +4,11 @@
     echo 'here1';
 
     $dsn = "mysql:host=127.0.0.1;dbname=jsdistributiondb;charset=utf8mb4";
-    print(getenv())
     print(getenv('user'))
     $pdo = new PDO($dsn, getenv('user'), getenv('pass'));
 
     echo 'here';
+
     exit;
 ?>
 <!DOCTYPE html>
